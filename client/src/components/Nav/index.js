@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -7,8 +8,18 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles((theme) => ({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
   root: {
     flexGrow: 1,
   },
@@ -65,6 +76,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
+  const anchor = 'left';
+  const [state, setState] = React.useState(false);
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState(open);
+  };
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, classes.fullList)}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {['Home', 'Sign Up', 'Login', 'Dashboard'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
 
   return (
     <div className={classes.root}>
@@ -76,7 +111,14 @@ export default function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            
+            <React.Fragment key={anchor}>
+            <MenuIcon onClick={toggleDrawer(true)}>{anchor}</MenuIcon>
+            <Drawer anchor={anchor} open={state} onClose={toggleDrawer(false)}>
+            {list(anchor)}
+            </Drawer>
+            </React.Fragment>
+            
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             TravelApp

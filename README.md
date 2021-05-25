@@ -1,5 +1,9 @@
 # Travel App
 
+## Wireframe
+
+![Wireframe](projectWireframe.jpg)
+
 ## Application Value
 
 ```

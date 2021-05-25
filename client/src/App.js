@@ -12,6 +12,9 @@ function App() {
           <Route exact path={["/"]}>
             <TravelApp />
           </Route>
+          <Route exact path={["/api/campgroundFetch"]}>
+            <TravelApp />
+          </Route>
         </Switch>
       </div>
     </Router>

@@ -1,12 +1,11 @@
-const axios = require("axios");
-var net = require("follow-redirects").https;
-var fs = require("fs");
-require("dotenv").config();
+import axios from "axios";
+import net from "follow-redirects";
+import fs from "fs";
+import dotenv from 'dotenv'
+// require("dotenv").config();
 
 var apiKey = "5e9b81867b2afddb58e91a4a7254e19c";
 var secret = "3a4f38d0fce3226b2b7a619e4263e22d";
-
-console.log(process.env.SECRETKEY);
 var auth_key = Buffer.from(`${apiKey}:${secret}`).toString("base64");
 
 var options = {
@@ -20,7 +19,7 @@ var options = {
   maxRedirects: 20,
 };
 
-var req = net.request(options, function (res) {
+var req = net.https.request(options, function (res) {
   var chunks = [];
 
   res.on("data", function (chunk) {

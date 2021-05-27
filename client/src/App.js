@@ -1,17 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TravelApp from "./pages/index";
-import Nav from "./components/Nav";
-import Map from "./pages/Map";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
 import SearchAppBar from "./components/Nav";
 import Home from "./pages/index";
 import Dashboard from "./pages/dashboard";
 import LoginPage from "./pages/loginpage";
 import SignUpPage from "./pages/signup";
 import { makeStyles } from "@material-ui/core/styles";
-
+import Map from "./pages/Map";
 const useStyles = makeStyles({});
 
 export default function App() {
@@ -25,7 +20,8 @@ export default function App() {
             <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
             <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
             <Route exact path="/signup" render={props => <SignUpPage {...props} />} />
-          
+            <Route exact path="/map" render={props => <Map {...props} />} />
+
           </Switch>
         </Router>
       </div>

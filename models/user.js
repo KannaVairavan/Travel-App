@@ -79,15 +79,5 @@ UserSchema.methods.lastUpdatedDate = function() {
 };
 
 const User = mongoose.model("User", UserSchema);
-const userInput={
-  username:"coder1234",
-  password:"1234567"
-}
-const user=new User(userInput);
-user.save((err, document)=>{
-  if(err)
-  console.log(err);
-  console.log(document);
-})
 
 module.exports = User;

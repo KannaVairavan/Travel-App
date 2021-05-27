@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt=require('bcrypt');
+
 
 const Schema = mongoose.Schema;
 
@@ -31,11 +31,11 @@ const UserSchema = new Schema({
 
   email: {
     type: String,
-    unique: true,
-    match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+    required: true,
+   
   },
 
-  userCreated: {
+  date: {
     type: Date,
     default: Date.now
   },
@@ -43,7 +43,8 @@ const UserSchema = new Schema({
   lastUpdated: Date,
 
   fullName: String,
-  trip:[{type:Schema.Types.ObjectId,    ref: "Trip"}]
+  
+  
 });
 
 UserSchema.pre('save', function(next){

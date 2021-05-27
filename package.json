@@ -30,9 +30,7 @@
     "follow-redirects": "^1.5.10",
     "fs": "^0.0.1-security",
     "if-env": "^1.0.4",
-    "install": "^0.13.0",
     "mongoose": "^5.3.16",
-    "npm": "^7.14.0",
     "react-map-gl": "^6.1.15",
     "xml2json": "^0.12.0"
   }

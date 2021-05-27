@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,10 +7,11 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom';
+
+
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -74,70 +74,81 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+const SearchAppBar = () => {
   const classes = useStyles();
-  const anchor = 'left';
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const [state, setState] = React.useState(false);
-  const toggleDrawer = (open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    setState(open);
+
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget);
   };
-  const list = (anchor) => (
-    <div
-      className={clsx(classes.list, classes.fullList)}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {['Home', 'Sign Up', 'Login', 'Dashboard'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+        
+        <Typography className={classes.title} variant="h6" noWrap>
+            TravelApp
+          </Typography>
+          
           <IconButton
             edge="start"
             className={classes.menuButton}
+            onClick={handleMenu}
             color="inherit"
-            aria-label="open drawer"
+            aria-label="menu"
           >
-            
-            <React.Fragment key={anchor}>
-            <MenuIcon onClick={toggleDrawer(true)}>{anchor}</MenuIcon>
-            <Drawer anchor={anchor} open={state} onClose={toggleDrawer(false)}>
-            {list(anchor)}
-            </Drawer>
-            </React.Fragment>
-            
+            <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            TravelApp
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+          <Menu
+            id="menu-bar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left"
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left"
+            }}
+            open={open}
+            onClose={() => setAnchorEl(null)}
+          >
+            <MenuItem>
+            <Link to="/">Home</Link>
+            </MenuItem>
+            <MenuItem>
+            <Link to="/dashboard">Dashboard</Link>
+            </MenuItem>
+            <MenuItem>
+            <Link to="/loginpage">Login</Link>
+            </MenuItem>
+            <MenuItem>
+            <Link to="/signup">Sign Up</Link>
+            </MenuItem>
+          </Menu>
+          
+
+             <div className={classes.search}>
+               <div className={classes.searchIcon}>
+                 <SearchIcon />
+                </div>
+                 <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
+
+export default SearchAppBar;

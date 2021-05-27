@@ -2,9 +2,7 @@
 
 ## Wireframe
 
-![Wireframe]("./projectWireframe.jpg")
-
-<img src="./projectWireframe.jpg" alt="Wireframe"  >
+![Wireframe](Project1_Wireframe.jpeg)
 
 ## Application Value
 

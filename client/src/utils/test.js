@@ -1,1 +1,0 @@
-import Net from 'follow-redirects'

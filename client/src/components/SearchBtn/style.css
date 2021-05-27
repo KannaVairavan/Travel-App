@@ -1,0 +1,51 @@
+.btn {
+  color: white !important;
+  font-size: 16px !important;
+  height: 32px;
+  width: 100px;
+  /* position: absolute; */
+  border: none;
+  bottom: 10%;
+  font-size: 24px;
+  cursor: pointer;
+  outline: none;
+}
+
+
+
+/* .pass {
+  left: 1%;
+  background: #E53935;
+}
+
+.pass::after {
+  content: "\f165";
+}
+
+.pick {
+  right: 1%;
+  background: #43A047;
+}
+
+.pick::after {
+  content: "\f164";
+} */
+
+.pick:hover::after, .pass:hover::after {
+  animation: iconBounce .57s 1;
+}
+
+@keyframes iconBounce {
+  0% {
+    font-size: 24px;
+  }
+  
+   50% {
+    font-size: 28px;
+  }
+  
+  100% {
+    font-size: 24px;
+  }
+
+}

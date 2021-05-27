@@ -5,6 +5,7 @@ import SearchGoat from "../utils/SearchLocation";
 
 function GetGoat() {
   const [searchInput, setSearch] = useState("");
+  const [results, setResults] = useState([])
 
   const HandleInput = (e) => {
     console.log(e.target.value);

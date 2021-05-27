@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SearchAppBar from "./components/Nav";
-import getGoat from './pages/roadGoatSearch'
+import GetGoat from './pages/roadGoatSearch'
 import Home from "./pages/index";
 import Dashboard from "./pages/dashboard";
 import LoginPage from "./pages/loginpage";

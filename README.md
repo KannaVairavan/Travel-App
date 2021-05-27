@@ -2,7 +2,7 @@
 
 ## Wireframe
 
-![Wireframe](projectWireframe.jpg)
+![Wireframe](Project1_Wireframe.jpeg)
 
 ## Application Value
 

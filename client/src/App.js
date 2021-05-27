@@ -1,4 +1,8 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import TravelApp from "./pages/index";
+import Nav from "./components/Nav";
+import Map from "./pages/Map";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 import SearchAppBar from "./components/Nav";
@@ -13,7 +17,6 @@ const useStyles = makeStyles({});
 export default function App() {
   const classes = useStyles();
   return (
-  
       <div className ={classes.container}>
         <Router>
           <SearchAppBar />

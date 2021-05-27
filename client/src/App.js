@@ -1,23 +1,36 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TravelApp from "./pages/index";
-import Nav from "./components/Nav";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import SearchAppBar from "./components/Nav";
 import getGoat from './pages/roadGoatSearch'
+import Home from "./pages/index";
+import Dashboard from "./pages/dashboard";
+import LoginPage from "./pages/loginpage";
+import SignUpPage from "./pages/signup";
+import { makeStyles } from "@material-ui/core/styles";
 
-function App() {
+
+const useStyles = makeStyles({});
+
+export default function App() {
+  const classes = useStyles();
   return (
-    <Router>
-      <div>
-        <Nav />
-        <Switch>
-          <Route exact path={["/"]}>
-            <TravelApp />
-          </Route>
-          <Route exact path= "/getgoat" component={getGoat}/>
-        </Switch>
+  
+      <div className ={classes.container}>
+        <Router>
+          <SearchAppBar />
+          <Switch>
+            <Route exact path="/" render={props => <Home {...props} />} />          
+            <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
+            <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
+            <Route exact path="/signup" render={props => <SignUpPage {...props} />} />
+            <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
+
+          
+          </Switch>
+        </Router>
       </div>
-    </Router>
+    
   );
 }
 
-export default App;

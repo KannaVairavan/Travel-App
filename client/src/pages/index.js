@@ -15,7 +15,7 @@ function TravelApp() {
               <h1>HOMEPAGE</h1>
             </Jumbotron>
             <form>
-              <Input
+              {/* <Input
                 name="title"
                 placeholder="Title (required)"
               />
@@ -26,18 +26,18 @@ function TravelApp() {
               <TextArea
                 name="synopsis"
                 placeholder="Synopsis (Optional)"
-              />
-              <FormBtn
+              /> */}
+              {/* <FormBtn
                 disabled={true}
               >
                 Submit Book
-              </FormBtn>
+              </FormBtn> */}
             </form>
           </Col>
           <Col size="md-6 sm-12">
-            <Jumbotron>
+            {/* <Jumbotron>
               <h1>Books On My List</h1>
-            </Jumbotron>
+            </Jumbotron> */}
           </Col>
         </Row>
       </Container>

@@ -1,14 +1,4 @@
-// import React from "react";
-
-// const SignUpPage = () => {
-//   return <div>This is the Sign Up Page</div>;
-// }
-
-// export default SignUpPage;
-
-
-
-import React, { useState }  from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
@@ -74,6 +64,13 @@ export default function SignUpPage(props) {
           variant="outlined"
           name="lastname"
           onChange={e => setlastname(e.target.value)}
+        />
+        <TextField
+          id="standard-textarea"
+          label="Username"
+          placeholder="Required"
+          multiline
+          variant="outlined"
         />
         <TextField
           id="standard-textarea"

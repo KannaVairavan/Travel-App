@@ -1,13 +1,3 @@
-// import React from "react";
-
-// const SignUpPage = () => {
-//   return <div>This is the Sign Up Page</div>;
-// }
-
-// export default SignUpPage;
-
-
-
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,6 +34,13 @@ export default function SignUpPage(props) {
         />
         <TextField
           id="standard-textarea"
+          label="Username"
+          placeholder="Required"
+          multiline
+          variant="outlined"
+        />
+        <TextField
+          id="standard-textarea"
           label="Email Address"
           placeholder="Required"
           multiline
@@ -58,7 +55,7 @@ export default function SignUpPage(props) {
           variant="outlined"
         />
         <Button variant="contained" color="primary">
-          Primary
+          Submit
         </Button>
       </div>
     </form>

@@ -31,21 +31,25 @@ const UserSchema = new Schema({
 
   email: {
     type: String,
+    unique: true,
+    match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
     required: true,
    
   },
 
-  date: {
-    type: Date,
-    default: Date.now
-  },
- 
-  lastUpdated: Date,
-
-  fullName: String,
+    date: {
+      type: Date,
+      default: Date.now
+    },
+  
+   
+    lastUpdated: Date,
+  
+    
+    fullName: String,
   
   
-});
+  });
 
 UserSchema.pre('save', function(next){
   if(!this.isModified('password'))

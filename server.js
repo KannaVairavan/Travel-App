@@ -11,11 +11,19 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 // Add routes, both API and view
 app.use(routes);
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/travel',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 
-// Connect to Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/travel");
 
 // Start the API server
 app.listen(PORT, function() {

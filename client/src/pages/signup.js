@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState }  from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
@@ -36,13 +37,14 @@ export default function SignUpPage(props) {
         email: email,
         password:password
       })
-        
-        .then(() => loadTrip())
+        //make load trip a Get API call
+        .then(() => loadTrip()) 
         .catch(err => console.log(err));
     }
   };
 
   return (
+    <form className={classes.root} noValidate autoComplete="off">
     <form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete="off">
       <div>
         <TextField
@@ -95,5 +97,6 @@ export default function SignUpPage(props) {
         </Button>
       </div>
     </form>
+  </form>
   );
 }

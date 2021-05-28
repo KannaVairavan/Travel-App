@@ -12,6 +12,11 @@ import Map from "./pages/Map";
 const useStyles = makeStyles({});
 
 export default function App() {
+  // const [token, setToken] = useState();
+  // if(!token) {
+  //   return <LoginPage setToken={setToken} />
+  // }
+
   const classes = useStyles();
   return (
       <div className ={classes.container}>

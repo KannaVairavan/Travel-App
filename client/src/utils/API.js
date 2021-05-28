@@ -16,10 +16,18 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+
+  saveUser:function(userData){
+    return axios.post("/api/user", userData);
+  },
+  getUser:function(userData){
+    return this.axios.post("/api/user", userData);
   }
 
 // getCampgroundSearch: function () {
 //   return axios.get()
+
 // }
 
 };

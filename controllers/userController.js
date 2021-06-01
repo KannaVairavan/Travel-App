@@ -1,5 +1,6 @@
 
 const db = require("../models");
+// get data and post data to User model
 module.exports = {
     // Defining methods for the authController
     findById: function(req, res) {

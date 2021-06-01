@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -31,19 +32,45 @@ const UserSchema = new Schema({
   email: {
     type: String,
     unique: true,
-    match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+    match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
+    required: true,
+   
   },
 
-  userCreated: {
-    type: Date,
-    default: Date.now
-  },
+    date: {
+      type: Date,
+      default: Date.now
+    },
+  
+   
+    lastUpdated: Date,
+  
+    
+    fullName: String,
+  
+  
+  });
 
-  lastUpdated: Date,
-
-  fullName: String
+UserSchema.pre('save', function(next){
+  if(!this.isModified('password'))
+    return next();
+    bcrypt.hash(this.password,10,(err, passwordHash)=>{
+      if(err)
+      return next(err);
+      this.password=passwordHash;
+      next();
+    })
 });
-
+UserSchema.methods.comparePassword=function(password,cb){
+  bcrypt.compare(password, this.password, (err, isMatch)=>{
+    if(err)
+      return cb(err)
+    else  
+      if(!isMatch)
+      return cb(null, isMatch);
+      return cb(null, this);
+  })
+}
 UserSchema.methods.setFullName = function() {
   this.fullName = `${this.firstName} ${this.lastName}`;
 

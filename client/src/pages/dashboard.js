@@ -1,7 +1,11 @@
 import React from "react";
+import GoogleMap from "../components/Map";
 
 const Dashboard = () => {
-  return <div>This is the Dashboard Page</div>;
+  return <div>
+    <GoogleMap/>
+
+  </div>;
 }
 
 export default Dashboard;

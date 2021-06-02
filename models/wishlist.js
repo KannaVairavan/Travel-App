@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const WishListSchema  = new Schema({
-    Wish :{ type: String, required: true },
+    wish :{ type: String, required: true },
   user: [
     {
       type: Schema.Types.ObjectId,

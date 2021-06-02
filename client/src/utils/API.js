@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   // Gets all wishlist
   getwishlists: function() {
-    return axios.get("/api/wishlists");
+    return axios.get("/api/wishlist");
   },
   // Gets the wishlist with the given id
   getwishlist: function(id) {

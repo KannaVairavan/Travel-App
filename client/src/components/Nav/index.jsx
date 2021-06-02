@@ -86,7 +86,7 @@ const SearchAppBar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Toolbar>
         
         <Typography className={classes.title} variant="h6" noWrap>

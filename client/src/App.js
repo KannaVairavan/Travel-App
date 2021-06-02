@@ -8,8 +8,17 @@ import LoginPage from "./pages/loginpage";
 import SignUpPage from "./pages/signup";
 import { makeStyles } from "@material-ui/core/styles";
 import Map from "./pages/Map";
+import { CssBaseline } from "@material-ui/core";
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: '100vh',
+    backgroundImage:`url(${process.env.PUBLIC_URL + "/assets/balkan-campers-ON2TRrhgOBU-unsplash.jpg"})`,
+    backgroundRepeat:'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  },
+}))
 
 export default function App() {
   // const [token, setToken] = useState();
@@ -19,7 +28,7 @@ export default function App() {
 
   const classes = useStyles();
   return (
-      <div className ={classes.container}>
+      <div className = {`${classes.container} ${classes.root}`}>
         <Router>
           <SearchAppBar />
           <Switch>
@@ -32,6 +41,7 @@ export default function App() {
 
           </Switch>
         </Router>
+        <CssBaseline />
       </div>
     
   );

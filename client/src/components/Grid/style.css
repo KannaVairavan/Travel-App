@@ -1,0 +1,26 @@
+.col-centered{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content:center;
+    align-items: center !important;
+    height:150px;
+}
+
+.container-fluid {
+    border: 1px  black solid;
+    margin-top: 20px;
+    margin-bottom:20px;
+    min-height:fit-content;
+}
+
+.container-main-body{
+    display:flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container-results-main{
+    height:100vh;
+    background-color: lightcoral;
+}

@@ -14,6 +14,9 @@ import Button from "@material-ui/core/Button";
     },
   }));
 
+  
+
+
   const handleFormSubmit = (username, password) => {
   // Preventing the default behavior of the form submit (which is to refresh the page)
     console.log(username);
@@ -21,6 +24,8 @@ import Button from "@material-ui/core/Button";
 
   
   }
+
+
 
   const Form = () => {
     const classes = useStyles();
@@ -63,6 +68,8 @@ import Button from "@material-ui/core/Button";
       </div>
     </form>
     );
+
+
   }
 
 export default Form;

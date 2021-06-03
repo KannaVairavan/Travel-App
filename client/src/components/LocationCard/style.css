@@ -1,1 +1,10 @@
-import React
+.row-results-main-body{
+    margin-top:20px;
+}
+
+.container-results-card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

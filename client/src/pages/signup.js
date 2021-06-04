@@ -16,36 +16,59 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUpPage(props) {
   const classes = useStyles();
-  const [firstname, setfirstname] = useState();
-  const [lastname, setlastname] = useState();
-  const [email, setemail] = useState();
-  const [password, setPassword] = useState();
+  const [signup, setSignup]=useState([])
+  const [formObject, setFormObject]=useState({
+    firstname:"",
+    lastname:"",
+    email:"",
+    password:""
+
+
+  })
+  // const [firstname, setfirstname] = useState();
+  // const [lastname, setlastname] = useState();
+  // const [email, setemail] = useState();
+  // const [password, setPassword] = useState();
   // const [submitted, setSubmitted]=useState(flase);
 
   function loadTrip() {
    
   };
-  const handleSubmit = e => {
+  // Update wishlist by id
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({...formObject, [name]: value})
+  };
+
+  const handleFormSubmit = e => {
     e.preventDefault();
     // setSubmitted(true);
-    console.log("email is " + email);
-    console.log("password is " + password);
-    if (email && password) {
-      API.saveBook({
-        firstName: firstname,
-        lastName: lastname,
-        email: email,
-        password:password
+    console.log("email is " + formObject.email);
+    console.log("password is " + formObject.password);
+    if (formObject.email && formObject.password) {
+      API.saveUser({
+        firstName: formObject.firstname,
+        lastName: formObject.lastname,
+        email: formObject.email,
+        password:formObject.password
+
+      }).then ((res)=>{
+          console.log(res)
       })
+      // if (response.ok) {
+      //   <Redirect to="/dashboard"/>
+      // } else {
+      //   alert('Invalid account details, failed to register.');
+      // }
         //make load trip a Get API call
-        .then(() => loadTrip()) 
+       
         .catch(err => console.log(err));
     }
   };
 
   return (
+    
     <form className={classes.root} noValidate autoComplete="off">
-    <form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete="off">
       <div>
         <TextField
           id="standard-textarea"
@@ -54,7 +77,8 @@ export default function SignUpPage(props) {
           multiline
           variant="outlined"
           name="firstname"
-          onChange={e => setfirstname(e.target.value)}
+          value={formObject.firstname}
+          onChange={handleInputChange}
           // {submitted && !firstname ?  <span>Please enter first name</span>:null}
          
         />
@@ -65,15 +89,10 @@ export default function SignUpPage(props) {
           multiline
           variant="outlined"
           name="lastname"
-          onChange={e => setlastname(e.target.value)}
+          value={formObject.lastName}
+          onChange={handleInputChange}
         />
-        <TextField
-          id="standard-textarea"
-          label="Username"
-          placeholder="Required"
-          multiline
-          variant="outlined"
-        />
+        
         <TextField
           id="standard-textarea"
           label="Email Address"
@@ -81,22 +100,29 @@ export default function SignUpPage(props) {
           multiline
           variant="outlined"
           name="email"
-          onChange={e => setemail(e.target.value)}
+          value={formObject.email}
+          onChange={handleInputChange}
         />
         <TextField
           id="outlined-password-input"
           label="Password"
+          name="password"
           placeholder="Required"
-          type="password"
-          autoComplete="current-password"
+          // type="password"
+          // autoComplete="current-password"
           variant="outlined"
-          onChange={e => setPassword(e.target.value)}
+          value={formObject.password}
+          onChange={handleInputChange}
         />
-        <Button variant="contained" color="primary" type="submit">
+        <Button 
+            onClick={handleFormSubmit}
+            variant="contained" 
+            color="primary" type="submit">
+          
           Submit
         </Button>
       </div>
     </form>
-  </form>
+ 
   );
 }

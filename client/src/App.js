@@ -46,17 +46,13 @@ export default function App() {
         <Router>
           <SearchAppBar />
           <Switch>
-            {/* <Route exact path="/" render={props => <Home {...props} />} />     */}
-            <Route exact path="/">
+            <Route exact path="/" render={props => <Home {...props} />} />    
+            {/* <Route exact path="/">
                 {loggedIn ? <Redirect to="/dashboard" /> : <Home />}
-            </Route>      
-            {/* <Route exact path="/dashboard" render={props => <Dashboard {...props} />} /> */}
+            </Route>       */}
+            <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
             <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
-            <Route exact path="/signup" 
-            render={props => <SignUpPage {...props } loggedIn={loggedIn} setloggedIn={setloggedIn}/>}
-            
-            />
-            
+            <Route exact path="/signup" render={props => <SignUpPage {...props } loggedIn={loggedIn} setloggedIn={setloggedIn}/>}  />         
             <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
 
           </Switch>
@@ -66,4 +62,4 @@ export default function App() {
   );
 }
 
-export default App;
+// export default App;

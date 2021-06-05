@@ -4,6 +4,7 @@ import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import MapGl from "../components/MapGl";
 
 function TravelApp() {
 
@@ -15,6 +16,7 @@ function TravelApp() {
                 Welcome!
               </Jumbotron>
             </Row>
+            <MapGl/>
           </Container>
       </div>
     );

@@ -1,0 +1,20 @@
+.row-results-main-body{
+    margin-top:20px;
+}
+
+.container-results-card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap:wrap;
+}
+
+.row-results-row {
+    justify-content: space-evenly;
+}
+
+.col-md-2 {
+display: flex;
+flex-direction: column;
+min-width: fit-content;
+}

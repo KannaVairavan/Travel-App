@@ -63,7 +63,7 @@ export default function App() {
         </Router>
         <CssBaseline />
       </div>
-    
   );
 }
 
+export default App;

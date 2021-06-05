@@ -7,7 +7,6 @@
 }
 
 .container-fluid {
-    border: 1px  black solid;
     margin-top: 20px;
     margin-bottom:20px;
     min-height:fit-content;
@@ -21,6 +20,5 @@
 }
 
 .container-results-main{
-    height:100vh;
-    background-color: lightcoral;
+    min-height:fit-content;
 }

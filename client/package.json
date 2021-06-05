@@ -6,7 +6,15 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^8.2.0",
+<<<<<<< HEAD
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.58",
+    "@material/card": "^11.0.0",
+    "react": "^16.13.1",
+=======
     "react": "^16.3.0",
+>>>>>>> b314b754e625037b7fa8b67a567bceed4bdf7aea
     "react-dom": "^16.13.1",
     "react-map-gl": "^6.1.16",
     "react-router-dom": "^5.1.2",

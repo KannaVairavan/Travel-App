@@ -1,5 +1,5 @@
 {
-  "name": "mern",
+  "name": "travel-app",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -20,9 +20,6 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2",
-    "@material/card": "^11.0.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",

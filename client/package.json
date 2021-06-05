@@ -6,10 +6,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^8.2.0",
-    "react": "^16.13.1",
+    "react": "^16.3.0",
     "react-dom": "^16.13.1",
+    "react-map-gl": "^6.1.16",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -19,29 +19,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function App() {
-  // const [token, setToken] = useState();
-  // if(!token) {
-  //   return <LoginPage setToken={setToken} />
-  // }
+ function App() {
+
 
   const classes = useStyles();
   return (
       <div className = {`${classes.container} ${classes.root}`}>
         <Router>
-          <SearchAppBar />
-          <Switch>
+          <SearchAppBar/>
+          <Switch> 
             <Route exact path="/" render={props => <Home {...props} />} />          
             <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
             <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
             <Route exact path="/signup" render={props => <SignUpPage {...props} />} />
             <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
-
           </Switch>
         </Router>
         <CssBaseline />
       </div>
-    
   );
 }
 
+export default App;

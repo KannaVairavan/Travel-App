@@ -9,39 +9,13 @@ function TravelApp() {
 
     return (
       <div>
-          {/* <Container fluid> */}
-            {/* <Row> */}
-              <Col size="md-6">
-                <Jumbotron>
-                  <h1>HOMEPAGE</h1>
-                </Jumbotron>
-                <form>
-                  {/* <Input
-                    name="title"
-                    placeholder="Title (required)"
-                  />
-                  <Input
-                    name="author"
-                    placeholder="Author (required)"
-                  />
-                  <TextArea
-                    name="synopsis"
-                    placeholder="Synopsis (Optional)"
-                  /> */}
-                  {/* <FormBtn
-                    disabled={true}
-                  >
-                    Submit Book
-                  </FormBtn> */}
-                </form>
-              </Col>
-              <Col size="md-6 sm-12">
-                {/* <Jumbotron>
-                  <h1>Books On My List</h1>
-                </Jumbotron> */}
-              </Col>
-            {/* </Row> */}
-          {/* </Container> */}
+          <Container fluid>
+            <Row>
+              <Jumbotron size="md-6">
+                Welcome!
+              </Jumbotron>
+            </Row>
+          </Container>
       </div>
     );
   }

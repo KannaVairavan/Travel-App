@@ -36,9 +36,8 @@ export default function App() {
             <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
             <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
             <Route exact path="/signup" render={props => <SignUpPage {...props} />} />
-            <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
+            {/* <Route exact path="/getGoat" render={props => <GetGoat {...props} />} /> */}
             <Route exact path="/map" render={props => <Map {...props} />} />
-
           </Switch>
         </Router>
         <CssBaseline />

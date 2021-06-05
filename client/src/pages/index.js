@@ -7,7 +7,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/FormBtn";
 import { SearchGoat, SearchGoatByID } from "../utils/SearchLocation";
 import LocationCard from "../components/Location";
-
+import MapGl from "../components/MapGl"; 
 function TravelApp() {
   const [searchInput, setSearch] = useState("");
   const [results, setResults] = useState([]);
@@ -102,6 +102,7 @@ function TravelApp() {
       <Container className="-results-main container-fluid">
         <LocationCard data={results}/>
       </Container>
+      <MapGl/>
     </Container>
   );
 }

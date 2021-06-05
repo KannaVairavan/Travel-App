@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+
 export default function App() {
    const [loggedIn, setloggedIn] = useState(false);
 
@@ -40,6 +41,7 @@ export default function App() {
     }
     console.log("app.js login status", loggedIn);
   }
+
   const classes = useStyles();
   return (
       <div className = {`${classes.container} ${classes.root}`}>
@@ -52,8 +54,10 @@ export default function App() {
             </Route>       */}
             <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
             <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
+
             <Route exact path="/signup" render={props => <SignUpPage {...props } loggedIn={loggedIn} setloggedIn={setloggedIn}/>}  />         
             <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
+
 
           </Switch>
         </Router>

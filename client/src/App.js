@@ -7,7 +7,7 @@ import Dashboard from "./pages/dashboard";
 import LoginPage from "./pages/loginpage";
 import SignUpPage from "./pages/signup";
 import { makeStyles } from "@material-ui/core/styles";
-import Map from "./pages/Map";
+import MapGl from "./components/MapGl";
 import { CssBaseline } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,30 +20,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function App() {
-  // const [token, setToken] = useState();
-  // if(!token) {
-  //   return <LoginPage setToken={setToken} />
-  // }
+ function App() {
+
 
   const classes = useStyles();
   return (
       <div className = {`${classes.container} ${classes.root}`}>
         <Router>
-          <SearchAppBar />
-          <Switch>
+          <SearchAppBar/>
+          <Switch> 
             <Route exact path="/" render={props => <Home {...props} />} />          
             <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
             <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
             <Route exact path="/signup" render={props => <SignUpPage {...props} />} />
-            <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
-            <Route exact path="/map" render={props => <Map {...props} />} />
-
+            <Route exact path="/getGoat" render={props => <GetGoat /> }/>
+            <Route exact path="/map" component={MapGl}></Route>
           </Switch>
         </Router>
         <CssBaseline />
       </div>
-    
   );
 }
 
+export default App;

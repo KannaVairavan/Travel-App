@@ -9,8 +9,8 @@ function TravelApp() {
 
     return (
       <div>
-          <Container fluid>
-            <Row>
+          {/* <Container fluid> */}
+            {/* <Row> */}
               <Col size="md-6">
                 <Jumbotron>
                   <h1>HOMEPAGE</h1>
@@ -40,8 +40,8 @@ function TravelApp() {
                   <h1>Books On My List</h1>
                 </Jumbotron> */}
               </Col>
-            </Row>
-          </Container>
+            {/* </Row> */}
+          {/* </Container> */}
       </div>
     );
   }

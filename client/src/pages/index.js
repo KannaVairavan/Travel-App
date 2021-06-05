@@ -13,11 +13,12 @@ function TravelApp() {
   const [results, setResults] = useState([]);
   const [holder, setHolder] = useState([]);
   const [detailsHolder, setDetails] = useState([]);
-
+  
   useEffect(() => {
     setResults(holder);
     setDetails(detailsHolder);
   }, [holder, detailsHolder]);
+
 
   const HandleInput = (e) => {
     e.preventDefault();

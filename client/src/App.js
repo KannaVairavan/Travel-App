@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useState, useEffect }  from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import SearchAppBar from "./components/Nav";
 import GetGoat from './pages/roadGoatSearch'
 import Home from "./pages/index";
@@ -20,21 +21,42 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function App() {
-  // const [token, setToken] = useState();
+   const [loggedIn, setloggedIn] = useState(false);
+
+   useEffect(() => {
+    testlogin()
+      
+    }, [loggedIn])
+   
   // if(!token) {
   //   return <LoginPage setToken={setToken} />
   // }
-
+  const testlogin=()=>{
+    if (!loggedIn) {
+      
+      setloggedIn(false);
+      console.log(loggedIn);
+     
+    }
+    console.log("app.js login status", loggedIn);
+  }
   const classes = useStyles();
   return (
       <div className = {`${classes.container} ${classes.root}`}>
         <Router>
           <SearchAppBar />
           <Switch>
-            <Route exact path="/" render={props => <Home {...props} />} />          
-            <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
+            {/* <Route exact path="/" render={props => <Home {...props} />} />     */}
+            <Route exact path="/">
+                {loggedIn ? <Redirect to="/dashboard" /> : <Home />}
+            </Route>      
+            {/* <Route exact path="/dashboard" render={props => <Dashboard {...props} />} /> */}
             <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
-            <Route exact path="/signup" render={props => <SignUpPage {...props} />} />
+            <Route exact path="/signup" 
+            render={props => <SignUpPage {...props } loggedIn={loggedIn} setloggedIn={setloggedIn}/>}
+            
+            />
+            
             <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
 
           </Switch>

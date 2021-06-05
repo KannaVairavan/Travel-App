@@ -16,12 +16,12 @@ export default {
   // Saves a wishlist to the database
   savewishlist: function(wishlistData) {
     return axios.post("/api/wishlist", wishlistData);
-  }
+  },
 
   saveUser:function(userData){
     return axios.post("/api/user", userData);
   },
-  getUser:function(id){
+  loginUser:function(id){
     return this.axios.post("/api/user",  + id);
   }
 

@@ -13,7 +13,14 @@ function TravelApp() {
   const [results, setResults] = useState([]);
   const [holder, setHolder] = useState([]);
   const [detailsHolder, setDetails] = useState([]);
-  
+  const [viewport, setViewport] = useState({
+    width: 1500,
+    height: 1000,
+    latitude: 38.00,
+    longitude: -97.00,
+    zoom: 3
+  });
+
   useEffect(() => {
     setResults(holder);
     setDetails(detailsHolder);
@@ -102,7 +109,7 @@ function TravelApp() {
       <Container className="-results-main container-fluid">
         <LocationCard data={results}/>
       </Container>
-      <MapGl/>
+      <MapGl results={results} viewport={viewport} setViewport={setViewport}/>
     </Container>
   );
 }

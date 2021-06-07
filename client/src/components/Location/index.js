@@ -6,6 +6,7 @@ import API from "../../utils/API";
 
 function LocationCard({ data }) {
   const [results, setResults] = useState([]);
+  
   const [detailedResults, setDetails] = useState([]);
   const [formObject, setFormObject]=useState({
     location:"",
@@ -26,17 +27,17 @@ function LocationCard({ data }) {
   }
 
   
-   const handleFormSubmit=(event)=>{
-    console.log("hi");
-      event.preventDefault();
+   const handleFormSubmit=(id)=>{
     
+      event.preventDefault();
+  
      
-     const locationValues = event.target.attribute
+     const locationValues = results[0]
      console.log("location data",locationValues);
         API.savewishlist({
-            location:locationValues.location,
-            coords_Lat:locationValues.coords_Lat,
-            coords_Lon:locationValues.coords_Lon
+            location:locationValues.cityName,
+            coords_Lat:locationValues.coords.lat,
+            coords_Lon:locationValues.coords.lon
         })
        .then ((res)=>{
           console.log(res)
@@ -57,7 +58,7 @@ function LocationCard({ data }) {
       <Row className={"-results-row row"}>
         {results.map((locations, index) => (
           <Col key={index} size="md-2">
-            <div className="card" style={{ width: "18rem", margin: "10px" }}>
+            <div  className="card" style={{ width: "18rem", margin: "10px" }}>
               <img
                 src={locations.image_info.img_src== null? "https://via.placeholder.com/150.png": locations.image_info.img_src}
                 className="card-img-top"
@@ -87,7 +88,7 @@ function LocationCard({ data }) {
                 </a>
                
                 
-                <button onClick={handleFormSubmit} >Add to fav</button>
+                <button  onClick={() => handleFormSubmit(results.index)} >Add to fav</button>
                
               </div>
             </div>

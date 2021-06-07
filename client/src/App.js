@@ -24,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
 export default function App() {
    const [loggedIn, setloggedIn] = useState(false);
 
-   useEffect(() => {
-    testlogin()
+  //  useEffect(() => {
+  //   setloggedIn(false);
       
-    }, [loggedIn])
+  //   }, [loggedIn])
    
   // if(!token) {
   //   return <LoginPage setToken={setToken} />
@@ -35,7 +35,7 @@ export default function App() {
   const testlogin=()=>{
     if (!loggedIn) {
       
-      setloggedIn(false);
+      
       console.log(loggedIn);
      
     }
@@ -45,22 +45,35 @@ export default function App() {
   const classes = useStyles();
   return (
       <div className = {`${classes.container} ${classes.root}`}>
-        <Router>
-          <SearchAppBar />
-          <Switch>
-            <Route exact path="/" render={props => <Home {...props} />} />    
-            {/* <Route exact path="/">
-                {loggedIn ? <Redirect to="/dashboard" /> : <Home />}
-            </Route>       */}
-            <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
-            <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
+        {/* <Router>
+            <SearchAppBar />
+            <Switch> */}
+              {/* Routes open to all users */}
+                  {/* <Route exact path="/" component={Home} />
+                  <Route exact path="/loginpage" component={LoginPage} />
+                  <Route exact path="/signup" component={SignUpPage}  loggedIn={loggedIn} setloggedIn={setloggedIn}  />        */}
 
-            <Route exact path="/signup" render={props => <SignUpPage {...props } loggedIn={loggedIn} setloggedIn={setloggedIn}/>}  />         
-            <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
+              {/* Routes for (authenticated) users */} 
+                  {/* <Route exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/dashboard">
+                      {loggedIn ? <Redirect to="/dashboard" /> : <Home />}
+                  </Route>
+            </Switch> */}
+        {/* </Router> */}
+              <Router>
+                <SearchAppBar />
+                  <Switch>
+                      <Route exact path="/" render={props => <Home {...props} />} />    
+                      <Route exact path="/dashboard"> 
+                           <Redirect to="/dashboard" component={Dashboard} />  
+                      </Route>      
+                      {/* <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />*/}
+                      <Route exact path="/loginpage" render={props => <LoginPage {...props} />} /> 
 
-
-          </Switch>
-        </Router>
+                      <Route exact path="/signup" render={props => <SignUpPage {...props } loggedIn={loggedIn} setloggedIn={setloggedIn}/>}  />         
+                      <Route exact path="/getGoat" render={props => <GetGoat {...props} />} /> 
+                  </Switch>
+              </Router>
         <CssBaseline />
       </div>
   );

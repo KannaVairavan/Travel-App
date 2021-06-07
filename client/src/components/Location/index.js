@@ -8,6 +8,7 @@ function LocationCard({ data }) {
   const [results, setResults] = useState([]);
   
   const [detailedResults, setDetails] = useState([]);
+
   const [formObject, setFormObject]=useState({
     location:"",
     coords_Lat:"",
@@ -20,6 +21,8 @@ function LocationCard({ data }) {
     setResults(data);
     // setDetails(data);
     callResults();
+    
+    
   }, [data]);
 
   async function callResults() {
@@ -27,10 +30,11 @@ function LocationCard({ data }) {
   }
 
   
-   const handleFormSubmit=(id)=>{
+   const handleFormSubmit=()=>{
     
-      event.preventDefault();
-  
+      // event.preventDefault();
+    //  const locationValues = event.target.attributes;
+    //  console.log("formobject",formObject)
      
      const locationValues = results[0]
      console.log("location data",locationValues);
@@ -58,7 +62,7 @@ function LocationCard({ data }) {
       <Row className={"-results-row row"}>
         {results.map((locations, index) => (
           <Col key={index} size="md-2">
-            <div  className="card" style={{ width: "18rem", margin: "10px" }}>
+            <div className="card" style={{ width: "18rem", margin: "10px" }}>
               <img
                 src={locations.image_info.img_src== null? "https://via.placeholder.com/150.png": locations.image_info.img_src}
                 className="card-img-top"
@@ -86,10 +90,14 @@ function LocationCard({ data }) {
                 <a href="#" className="card-link">
                   Another link
                 </a>
-               
+                {/* {setFormObject({
+                    location:locations.cityName,  
+                    coords_Lat:locations.coords.lat,
+                    coords_Lon:locations.coords.lon
+                  
+                  }) } */}
+                <button  onClick={handleFormSubmit} >Add to fav</button>
                 
-                <button  onClick={() => handleFormSubmit(results.index)} >Add to fav</button>
-               
               </div>
             </div>
           </Col>

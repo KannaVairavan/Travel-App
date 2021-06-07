@@ -4,8 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import API from "../utils/API";
+import Dashboard from "../pages/dashboard"
 
-
+import {Redirect} from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,9 +63,9 @@ export default function SignUpPage(props) {
          
          
           if (res.status === 200) {
-            
-            props.setloggedIn(true);
-                      
+            console.log("loggedin");
+            // props.setloggedIn(true);
+            return (<Redirect to="/loginpage"  />   )       
 
            } else {
             alert('Invalid account details, failed to register.');

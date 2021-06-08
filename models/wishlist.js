@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const WishListSchema  = new Schema({
-    
+    location_id:{ type: String, required: true },
     location:{ type: String, required: true },
     coords_Lat:{ type: Number, required: true},
     coords_Lon:{ type: Number, required: true },

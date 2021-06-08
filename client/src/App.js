@@ -22,48 +22,23 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function App() {
-   const [loggedIn, setloggedIn] = useState(false);
-
-   useEffect(() => {
-    testlogin()
-      
-    }, [loggedIn])
-   
-  // if(!token) {
-  //   return <LoginPage setToken={setToken} />
-  // }
-  const testlogin=()=>{
-    if (!loggedIn) {
-      
-      setloggedIn(false);
-      console.log(loggedIn);
-     
-    }
-    console.log("app.js login status", loggedIn);
-  }
-
-  const classes = useStyles();
-  return (
-      <div className = {`${classes.container} ${classes.root}`}>
-        <Router>
-          <SearchAppBar />
-          <Switch>
-            <Route exact path="/" render={props => <Home {...props} />} />    
-            {/* <Route exact path="/">
-                {loggedIn ? <Redirect to="/dashboard" /> : <Home />}
-            </Route>       */}
-            <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
-            <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
-
-            <Route exact path="/signup" render={props => <SignUpPage {...props } loggedIn={loggedIn} setloggedIn={setloggedIn}/>}  />         
-            <Route exact path="/getGoat" render={props => <GetGoat {...props} />} />
-
-
-          </Switch>
-        </Router>
-        <CssBaseline />
-      </div>
-  );
+  const [loggedIn, setloggedIn] = useState(false);
+ const classes = useStyles();
+ return (
+     <div className = {`${classes.container} ${classes.root}`}>
+       <Router>
+         <SearchAppBar />
+         <Switch>
+           <Route exact path="/" component={Home}/>    
+           <Route exact path="/dashboard" component={Dashboard} />
+           <Route exact path="/loginpage" component={LoginPage} />
+           <Route exact path="/signup" loggedIn={loggedIn} setloggedIn={setloggedIn} component={SignUpPage}> 
+             {loggedIn ? <Redirect to="/dashboard"/> : <SignUpPage/>}
+           </Route>        
+           {/* <Route exact path="/getGoat" component={GetGoat} /> */}
+         </Switch>
+       </Router>
+       <CssBaseline />
+     </div>
+ );
 }
-
-// export default App;

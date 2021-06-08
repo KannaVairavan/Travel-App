@@ -2,20 +2,54 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "../Grid";
 import { SearchGoatByID } from "../../utils/SearchLocation";
 import "./style.css";
+import API from "../../utils/API";
 
-function LocationCard({ data }) {
+function LocationCard({ data },props) {
   const [results, setResults] = useState([]);
+  
   const [detailedResults, setDetails] = useState([]);
+
+  const [formObject, setFormObject]=useState({
+    location:"",
+    coords_Lat:"",
+    coords_Lon:""
+
+
+  })
 
   useEffect(() => {
     setResults(data);
     // setDetails(data);
     callResults();
+    
+    
   }, [data]);
 
   async function callResults() {
     console.log("Passed Data: ", data);
   }
+
+  
+   const handleFormSubmit=(event, index)=>{
+    
+      event.preventDefault();
+    //  const locationValues = event.target.attributes;
+    //  console.log("formobject",formObject)
+     
+       const locationValues = results[index]
+     console.log("location data",locationValues);
+        API.savewishlist({
+            location:locationValues.cityName,
+            coords_Lat:locationValues.coords.lat,
+            coords_Lon:locationValues.coords.lon
+        })
+       .then ((res)=>{
+          console.log(res)
+       })
+       .catch(err => console.log(err));
+   
+
+}
   return (
     <Container className={"-results-card-body "}>
       <Row className={"-title-row"}>
@@ -35,7 +69,8 @@ function LocationCard({ data }) {
                 alt="..."
               />
               <div className="card-body">
-                <h5 className="card-title">{locations.cityName}</h5>
+                <h5 className="card-title" >{locations.cityName}</h5>
+
                 <p className="card-text">
                   {/* Tourist Rating: {locations.details.data.attributes.foursquare_url} */}
                 </p>
@@ -55,9 +90,18 @@ function LocationCard({ data }) {
                 <a href="#" className="card-link">
                   Another link
                 </a>
+                {/* {setFormObject({
+                    location:locations.cityName,  
+                    coords_Lat:locations.coords.lat,
+                    coords_Lon:locations.coords.lon
+                  
+                  }) } */}
+                <button  onClick={(event)=>handleFormSubmit(event, locations.index)} >Add to fav</button>
+                
               </div>
             </div>
           </Col>
+          
         ))}
       </Row>
     </Container>

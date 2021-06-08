@@ -21,8 +21,8 @@ export default {
   saveUser:function(userData){
     return axios.post("/api/user", userData);
   },
-  getUser:function(userData){
-    return this.axios.post("/api/user", userData);
+  loginUser:function(id){
+    return this.axios.post("/api/user",  + id);
   }
 
 // getCampgroundSearch: function () {

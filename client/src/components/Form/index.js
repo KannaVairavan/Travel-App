@@ -19,7 +19,7 @@ import Button from "@material-ui/core/Button";
 
   const handleFormSubmit = (event, username, password) => {
   // Preventing the default behavior of the form submit (which is to refresh the page)
-  event.preventDefault();
+    event.preventDefault();
     console.log(username);
     console.log(password);
 

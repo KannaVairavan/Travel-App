@@ -4,6 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import API from "../utils/API";
+import Dashboard from "../pages/dashboard"
+
+import {Redirect} from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,18 +21,16 @@ export default function SignUpPage(props) {
   const classes = useStyles();
   const [signup, setSignup]=useState([])
   const [formObject, setFormObject]=useState({
-    firstname:"",
-    lastname:"",
+    firstName:"",
+    lastName:"",
     email:"",
     password:""
 
 
   })
-  // const [firstname, setfirstname] = useState();
-  // const [lastname, setlastname] = useState();
-  // const [email, setemail] = useState();
-  // const [password, setPassword] = useState();
-  // const [submitted, setSubmitted]=useState(flase);
+
+  const [submitted, setSubmitted]=useState(false);
+ 
 
   function loadTrip() {
    
@@ -42,26 +43,41 @@ export default function SignUpPage(props) {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    // setSubmitted(true);
+     setSubmitted(true);
+    
     console.log("email is " + formObject.email);
     console.log("password is " + formObject.password);
+    console.log("firstname is " + formObject.firstName);
+    console.log("lastname is " + formObject.lastName);
     if (formObject.email && formObject.password) {
       API.saveUser({
-        firstName: formObject.firstname,
-        lastName: formObject.lastname,
+        firstName: formObject.firstName,
+        lastName: formObject.lastName,
         email: formObject.email,
         password:formObject.password
 
-      }).then ((res)=>{
-          console.log(res)
       })
-      // if (response.ok) {
-      //   <Redirect to="/dashboard"/>
-      // } else {
-      //   alert('Invalid account details, failed to register.');
-      // }
-        //make load trip a Get API call
-       
+      
+      .then ((res)=>{
+          console.log(res)
+         
+         
+          if (res.status === 200) {
+            console.log("loggedin");
+             props.setloggedIn(true);
+            // return (<Redirect to="/loginpage"  />   )       
+
+           } else {
+            alert('Invalid account details, failed to register.');
+           }
+      })
+      .then(() => setFormObject({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password:""
+      }))
+           
         .catch(err => console.log(err));
     }
   };
@@ -69,6 +85,7 @@ export default function SignUpPage(props) {
   return (
     
     <form className={classes.root} noValidate autoComplete="off">
+      
       <div>
         <TextField
           id="standard-textarea"
@@ -76,23 +93,25 @@ export default function SignUpPage(props) {
           placeholder="Required"
           multiline
           variant="outlined"
-          name="firstname"
-          value={formObject.firstname}
+          name="firstName"
+          value={formObject.firstName}
           onChange={handleInputChange}
-          // {submitted && !firstname ?  <span>Please enter first name</span>:null}
+          
          
         />
+        {submitted && !formObject.firstName ? <span> Please enter first name</span>:null}
+       
         <TextField
           id="standard-textarea"
           label="Last Name"
           placeholder="Required"
           multiline
           variant="outlined"
-          name="lastname"
+          name="lastName"
           value={formObject.lastName}
           onChange={handleInputChange}
         />
-        
+           {submitted && !formObject.lastName ? <span> Please enter last name</span>:null}
         <TextField
           id="standard-textarea"
           label="Email Address"
@@ -103,24 +122,26 @@ export default function SignUpPage(props) {
           value={formObject.email}
           onChange={handleInputChange}
         />
+           {submitted && !formObject.email ? <span> Please enter email</span>:null}
         <TextField
           id="outlined-password-input"
           label="Password"
           name="password"
           placeholder="Required"
-          // type="password"
+          type="password"
           // autoComplete="current-password"
           variant="outlined"
           value={formObject.password}
           onChange={handleInputChange}
         />
-        <Button 
+        <button 
+
             onClick={handleFormSubmit}
             variant="contained" 
             color="primary" type="submit">
-          
+           
           Submit
-        </Button>
+        </button>
       </div>
     </form>
  

@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useState, useEffect }  from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import SearchAppBar from "./components/Nav";
 import GetGoat from './pages/roadGoatSearch'
 import Home from "./pages/index";
@@ -19,24 +20,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
- function App() {
 
-  const classes = useStyles();
-  return (
-      <div className = {`${classes.container} ${classes.root}`}>
-        <Router>
-          <SearchAppBar/>
-          <Switch> 
-            <Route exact path="/" render={props => <Home {...props} />} />          
-            <Route exact path="/dashboard" render={props => <Dashboard {...props} />} />
-            <Route exact path="/loginpage" render={props => <LoginPage {...props} />} />
-            <Route exact path="/signup" render={props => <SignUpPage {...props} />} />
 
-          </Switch>
-        </Router>
-        <CssBaseline />
-      </div>
-  );
+export default function App() {
+  const [loggedIn, setloggedIn] = useState(false);
+ const classes = useStyles();
+ return (
+     <div className = {`${classes.container} ${classes.root}`}>
+       <Router>
+         <SearchAppBar />
+         <Switch>
+           <Route exact path="/" component={Home}/>    
+           <Route exact path="/dashboard" component={Dashboard} />
+           <Route exact path="/loginpage" component={LoginPage} />
+           <Route exact path="/signup" loggedIn={loggedIn} setloggedIn={setloggedIn} component={SignUpPage}> 
+             {loggedIn ? <Redirect to="/dashboard"/> : <SignUpPage/>}
+           </Route>        
+           {/* <Route exact path="/getGoat" component={GetGoat} /> */}
+         </Switch>
+       </Router>
+       <CssBaseline />
+     </div>
+ );
 }
-
-export default App;

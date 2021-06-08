@@ -42,12 +42,12 @@ function LocationCard({ data },props) {
 
   
    const handleFormSubmit=(event, index)=>{
-    
+    console.log(index);
       event.preventDefault();
     //  const locationValues = event.target.attributes;
     //  console.log("formobject",formObject)
      
-       const locationValues = results[index]
+     const locationValues = results[index]
      console.log("location data",locationValues);
         API.savewishlist({
             location:locationValues.cityName,
@@ -84,7 +84,7 @@ function LocationCard({ data },props) {
                 <h5 className="card-title" >{locations.cityName}</h5>
 
                 <p className="card-text">
-                {locations.details.data.attributes.average_rating == null} ? "na" : "Tourist Rating: " {locations.details.data.attributes.average_rating}
+                {/* {locations.details.data.attributes.average_rating == null} ? "na" : "Tourist Rating: " {locations.details.data.attributes.average_rating} */}
                 </p>
               </div>
               <ul className="list-group list-group-flush">
@@ -108,7 +108,7 @@ function LocationCard({ data },props) {
                     coords_Lon:locations.coords.lon
                   
                   }) } */}
-                <button  onClick={(event)=>handleFormSubmit(event, locations.index)} >Add to fav</button>
+                <button  onClick={(event)=>handleFormSubmit(event, index)} >Add to fav</button>
                 
               </div>
             </div>

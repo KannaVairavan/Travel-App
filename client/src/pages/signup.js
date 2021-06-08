@@ -64,8 +64,8 @@ export default function SignUpPage(props) {
          
           if (res.status === 200) {
             console.log("loggedin");
-            // props.setloggedIn(true);
-            return (<Redirect to="/loginpage"  />   )       
+             props.setloggedIn(true);
+            // return (<Redirect to="/loginpage"  />   )       
 
            } else {
             alert('Invalid account details, failed to register.');

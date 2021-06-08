@@ -4,7 +4,7 @@ import { SearchGoatByID } from "../../utils/SearchLocation";
 import "./style.css";
 import API from "../../utils/API";
 
-function LocationCard({ data }) {
+function LocationCard({ data },props) {
   const [results, setResults] = useState([]);
   
   const [detailedResults, setDetails] = useState([]);
@@ -30,13 +30,13 @@ function LocationCard({ data }) {
   }
 
   
-   const handleFormSubmit=()=>{
+   const handleFormSubmit=(event, index)=>{
     
-      // event.preventDefault();
+      event.preventDefault();
     //  const locationValues = event.target.attributes;
     //  console.log("formobject",formObject)
      
-     const locationValues = results[0]
+       const locationValues = results[index]
      console.log("location data",locationValues);
         API.savewishlist({
             location:locationValues.cityName,
@@ -96,7 +96,7 @@ function LocationCard({ data }) {
                     coords_Lon:locations.coords.lon
                   
                   }) } */}
-                <button  onClick={handleFormSubmit} >Add to fav</button>
+                <button  onClick={(event)=>handleFormSubmit(event, locations.index)} >Add to fav</button>
                 
               </div>
             </div>

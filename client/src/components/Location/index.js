@@ -9,19 +9,13 @@ function LocationCard({ data },props) {
   
   const [detailedResults, setDetails] = useState([]);
 
-  const [formObject, setFormObject]=useState({
-    location:"",
-    coords_Lat:"",
-    coords_Lon:""
-
-
-  })
+  
 
   useEffect(() => {
     console.log(data)
     setResults(data );
     if (data.length) {
-      console.log(data[0].details.data.attributes.foursquare_url)
+      // console.log(data[0].details.data.attributes.foursquare_url)
       callResults() 
     } console.log('no data')
 
@@ -44,12 +38,11 @@ function LocationCard({ data },props) {
    const handleFormSubmit=(event, index)=>{
     console.log(index);
       event.preventDefault();
-    //  const locationValues = event.target.attributes;
-    //  console.log("formobject",formObject)
-     
+        
      const locationValues = results[index]
      console.log("location data",locationValues);
         API.savewishlist({
+            location_id:locationValues.city_id,
             location:locationValues.cityName,
             coords_Lat:locationValues.coords.lat,
             coords_Lon:locationValues.coords.lon
@@ -102,12 +95,7 @@ function LocationCard({ data },props) {
                 <a href="#" className="card-link">
                   Another link
                 </a>
-                {/* {setFormObject({
-                    location:locations.cityName,  
-                    coords_Lat:locations.coords.lat,
-                    coords_Lon:locations.coords.lon
-                  
-                  }) } */}
+                
                 <button  onClick={(event)=>handleFormSubmit(event, index)} >Add to fav</button>
                 
               </div>

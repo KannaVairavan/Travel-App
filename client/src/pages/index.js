@@ -13,7 +13,8 @@ function TravelApp() {
   const [results, setResults] = useState([]);
   const [holder, setHolder] = useState([]);
   const [detailsHolder, setDetails] = useState([]);
-  
+
+
   useEffect(() => {
     setResults(holder);
     setDetails(detailsHolder);
@@ -42,7 +43,6 @@ function TravelApp() {
           lon: item.attributes.longitude,
         };
         resultsObject.push({ id, cityName, coords, city_id, image_info });
-        console.log("resultsObject first push: ", resultsObject)
       });
 
       // add image link to the data structure

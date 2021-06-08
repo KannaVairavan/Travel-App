@@ -18,16 +18,27 @@ function LocationCard({ data },props) {
   })
 
   useEffect(() => {
-    setResults(data);
-    // setDetails(data);
-    callResults();
-    
-    
+    console.log(data)
+    setResults(data );
+    if (data.length) {
+      console.log(data[0].details.data.attributes.foursquare_url)
+      callResults() 
+    } console.log('no data')
+
   }, [data]);
 
-  async function callResults() {
-    console.log("Passed Data: ", data);
+  const callResults = () => {
+    console.log("Passed Data: ", data );
   }
+
+
+  const preciseRating = (number) => {
+    return(
+      number.toPrecision(3)
+    )
+  }
+
+  
 
   
    const handleFormSubmit=(event, index)=>{
@@ -50,6 +61,7 @@ function LocationCard({ data },props) {
    
 
 }
+
   return (
     <Container className={"-results-card-body "}>
       <Row className={"-title-row"}>
@@ -72,7 +84,7 @@ function LocationCard({ data },props) {
                 <h5 className="card-title" >{locations.cityName}</h5>
 
                 <p className="card-text">
-                  {/* Tourist Rating: {locations.details.data.attributes.foursquare_url} */}
+                {locations.details.data.attributes.average_rating == null} ? "na" : "Tourist Rating: " {locations.details.data.attributes.average_rating}
                 </p>
               </div>
               <ul className="list-group list-group-flush">

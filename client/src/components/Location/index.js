@@ -12,18 +12,14 @@ function LocationCard({ data },props) {
   
 
   useEffect(() => {
-    console.log(data)
+    console.log("LocationCard", data)
     setResults(data );
     if (data.length) {
       // console.log(data[0].details.data.attributes.foursquare_url)
-      callResults() 
+      console.log("Passed Data: ", data );
     } console.log('no data')
 
   }, [data]);
-
-  const callResults = () => {
-    console.log("Passed Data: ", data );
-  }
 
 
   const preciseRating = (number) => {

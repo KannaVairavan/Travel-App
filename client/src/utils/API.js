@@ -27,7 +27,14 @@ export default {
   signup: function(userData){
     return axios.post("/api/signup", userData);
   },
-
+  nearbySearch:function(Lat, Long){
+    return axios.get('/api/nearbySearch', {
+      params: {
+        lat: Lat,
+        lon: Long
+      }
+    });
+  }
 
 // getCampgroundSearch: function () {
 //   return axios.get()

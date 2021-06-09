@@ -7,7 +7,10 @@ import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/FormBtn";
 import { SearchGoat, SearchGoatByID } from "../utils/SearchLocation";
 import LocationCard from "../components/Location";
-import MapGl from "../components/MapGl"; 
+import MapGl from "../components/MapGl";
+
+
+
 function TravelApp() {
   const [searchInput, setSearch] = useState("");
   const [results, setResults] = useState([]);
@@ -37,7 +40,8 @@ function TravelApp() {
     e.preventDefault();
     SearchGoat(searchInput).then((res) => {
       const resultsObject = [];
-      res.data.data.map((item, index) => {
+      //slice(0,1) only returns first result in index
+      res.data.data.slice(0,1).map((item, index) => {
         const id = index;
         const city_id = item.id;
         const image_info = {
@@ -49,34 +53,37 @@ function TravelApp() {
           lat: item.attributes.latitude,
           lon: item.attributes.longitude,
         };
-        resultsObject.push({ id, cityName, coords, city_id, image_info });
-      });
-
-      // add image link to the data structure
-      for (let i = 0; i < res.data.included.length; i++) {
-        if (i > resultsObject.length - 1) {
-          continue;
-        }
-        try {
-          let image_url = res.data.included[i].attributes.image.thumb;
-          resultsObject[i].image_info.img_src = image_url;
-        } 
-        catch (error) {
-          let image_url = "https://via.placeholder.com/150.png";
-          resultsObject[i].image_info.img_src = image_url;
-        } 
-      }
-      resultsObject.forEach(async (item) => {
-        await SearchGoatByID(item.city_id).then(async (res, index) => {
-          if (res.data.data.id === item.city_id) {
-            item["details"] = {
-              data: res.data.data,
-              includes: res.data.included,
-            };
+        //GooglePlaces API request to back end
+        API.nearbySearch(coords.lat, coords.lon)
+        .then((response) => {
+          resultsObject.push({ id, cityName, coords, city_id, image_info, restaurant: response.data.restaurant, park: response.data.park, rv_park: response.data.rv_park, tourist_attraction: response.data.tourist_attraction });
+          // add image link to the data structure
+          for (let i = 0; i < res.data.included.length; i++) {
+            if (i > resultsObject.length - 1) {
+              continue;
+            }
+            try {
+              let image_url = res.data.included[i].attributes.image.thumb;
+              resultsObject[i].image_info.img_src = image_url;
+            } 
+            catch (error) {
+              let image_url = "https://via.placeholder.com/150.png";
+              resultsObject[i].image_info.img_src = image_url;
+            } 
           }
-        });
-        setHolder(resultsObject);
-      });
+          resultsObject.forEach(async (item) => {
+            await SearchGoatByID(item.city_id).then(async (res, index) => {
+              if (res.data.data.id === item.city_id) {
+                item["details"] = {
+                  data: res.data.data,
+                  includes: res.data.included,
+                };
+              }
+            });
+            setHolder(resultsObject);
+          });
+        })
+      })      
     });
   };
 

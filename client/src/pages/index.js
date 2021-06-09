@@ -7,7 +7,10 @@ import { Col, Row, Container } from "../components/Grid";
 import { Input, FormBtn } from "../components/FormBtn";
 import { SearchGoat, SearchGoatByID } from "../utils/SearchLocation";
 import LocationCard from "../components/Location";
-import MapGl from "../components/MapGl"; 
+import MapGl from "../components/MapGl";
+
+
+
 function TravelApp() {
   const [searchInput, setSearch] = useState("");
   const [results, setResults] = useState([]);
@@ -37,7 +40,8 @@ function TravelApp() {
     e.preventDefault();
     SearchGoat(searchInput).then((res) => {
       const resultsObject = [];
-      res.data.data.map((item, index) => {
+      //slice(0,1) only returns first result in index
+      res.data.data.slice(0,1).map((item, index) => {
         const id = index;
         const city_id = item.id;
         const image_info = {
@@ -49,8 +53,12 @@ function TravelApp() {
           lat: item.attributes.latitude,
           lon: item.attributes.longitude,
         };
+        API.nearbySearch(coords.lat, coords.lon)
+        .then((res) => {
+          console.log(res);
+        })
         resultsObject.push({ id, cityName, coords, city_id, image_info });
-      });
+      })
 
       // add image link to the data structure
       for (let i = 0; i < res.data.included.length; i++) {

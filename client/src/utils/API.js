@@ -23,6 +23,14 @@ export default {
   },
   loginUser:function(id){
     return this.axios.post("/api/user",  + id);
+  },
+  nearbySearch:function(Lat, Long){
+    return axios.get('/api/nearbySearch', {
+      params: {
+        lat: Lat,
+        lon: Long
+      }
+    });
   }
 
 // getCampgroundSearch: function () {

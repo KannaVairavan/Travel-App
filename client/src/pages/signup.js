@@ -50,23 +50,18 @@ export default function SignUpPage(props) {
     console.log("firstname is " + formObject.firstName);
     console.log("lastname is " + formObject.lastName);
     if (formObject.email && formObject.password) {
-      API.saveUser({
+      API.signup({
         firstName: formObject.firstName,
         lastName: formObject.lastName,
         email: formObject.email,
         password:formObject.password
-
       })
       
       .then ((res)=>{
-          console.log(res)
-         
-         
+          console.log("res-token", res);
           if (res.status === 200) {
-            console.log("loggedin");
-             props.setloggedIn(true);
+            localStorage.setItem("usertoken", res)
             // return (<Redirect to="/loginpage"  />   )       
-
            } else {
             alert('Invalid account details, failed to register.');
            }

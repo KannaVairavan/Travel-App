@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
+import API from "../../utils/API";
 // This file exports the Input, TextArea, and FormBtn components
 
   const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,17 @@ import Button from "@material-ui/core/Button";
     event.preventDefault();
     console.log(username);
     console.log(password);
+    API.login({username, password})
 
+    .then((res) => {
+      console.log("res login" , res);
+
+      if(res.status === 200){
+        localStorage.setItem("usertoken", res)
+      } else {
+        alert("cannot login");
+      }
+    })
   
   }
 

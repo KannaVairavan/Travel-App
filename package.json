@@ -27,6 +27,8 @@
     "follow-redirects": "^1.5.10",
     "fs": "^0.0.1-security",
     "if-env": "^1.0.4",
+    "jose": "^3.12.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.3.16",
     "xml2json": "^0.12.0"
   }

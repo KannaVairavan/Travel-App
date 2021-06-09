@@ -21,8 +21,11 @@ export default {
   saveUser:function(userData){
     return axios.post("/api/user", userData);
   },
-  loginUser:function(id){
-    return this.axios.post("/api/user",  + id);
+  login:function(userData){
+    return this.axios.post("/api/login", userData);
+  },
+  signup: function(userData){
+    return axios.post("/api/signup", userData);
   },
   nearbySearch:function(Lat, Long){
     return axios.get('/api/nearbySearch', {

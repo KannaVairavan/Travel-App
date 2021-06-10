@@ -74,8 +74,46 @@ function LocationCard({ data },props) {
                   Lat: {locations.coords.lat} <br />
                   Long: {locations.coords.lon}
                 </li>
-                <li className="list-group-item">A second item</li>
-                <li className="list-group-item">A third item</li>
+                <h2>
+                  Park Name
+                </h2>
+                {locations.park.map((park) => {
+                  return(
+                    <div>
+                    {park.name}
+                  </div>
+                  )
+                })}
+                 <h2>
+                  Restaurants
+                </h2>
+                {locations.restaurant.map((restaurant) => {
+                  return(
+                    <div>
+                    {restaurant.name}
+                  </div>
+                  )
+                })}
+                <h2>
+                  RV Parks
+                </h2>
+                {locations.rv_park.map((rv_park) => {
+                  return(
+                    <div>
+                    {rv_park.name}
+                  </div>
+                  )
+                })}
+                <h2>
+                  Tourist Attractions
+                </h2>
+                {locations.tourist_attraction.map((tourist_attraction) => {
+                  return(
+                    <div>
+                    {tourist_attraction.name}
+                  </div>
+                  )
+                })}
               </ul>
               <div className="card-body">
                 <a href="#" className="card-link">

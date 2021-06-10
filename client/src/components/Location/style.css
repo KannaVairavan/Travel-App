@@ -1,20 +1,88 @@
-.row-results-main-body{
-    margin-top:20px;
+.row-results-main-body {
+  margin-top: 20px;
 }
 
-.container-results-card-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap:wrap;
+.container-results-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .row-results-row {
-    justify-content: space-evenly;
+  justify-content: space-evenly;
 }
 
 .col-md-2 {
-display: flex;
-flex-direction: column;
-min-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  min-width: fit-content;
 }
+
+.row-card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.col-rating-col {
+  justify-content: center;
+}
+
+.city-rating {
+  display: flex;
+  justify-content: center;
+}
+
+.city-rating-title {
+  text-decoration: underline;
+}
+
+.col-card-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+.guide-icon {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }

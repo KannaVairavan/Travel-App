@@ -67,24 +67,6 @@ function LocationCard({ data }, props) {
     console.log(targetURLs);
     return targetURLs[0].split(": ")[1];
   };
-  const handleFormSubmit=(event, index)=>{
-    console.log(index);
-      event.preventDefault();
-        
-      const locationValues = results[index]
-        console.log("location data",locationValues);
-        API.savewishlist({
-            location_data:locationValues
-            // location_id:locationValues.city_id,
-            // location:locationValues.cityName,
-            // coords_Lat:locationValues.coords.lat,
-            // coords_Lon:locationValues.coords.lon
-          })
-          .then ((res)=>{
-          console.log(res)
-        })
-        .catch(err => console.log(err));
-  }
   
   const useStyles = makeStyles((theme) => ({
     expand: {

@@ -34,7 +34,6 @@ export default function App() {
            <Route exact path="/dashboard" component={() => <Dashboard authorized={true}/>} />
            <Route exact path="/loginpage" component={LoginPage} />
            <Route exact path="/signup" component={SignUpPage}/> 
-           {/* <Route exact path="/getGoat" component={GetGoat} /> */}
          </Switch>
        </Router>
        <CssBaseline />

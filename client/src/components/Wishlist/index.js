@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1)
       },
     }));
+    
 function Wishlist(){
     // Setting our component's initial state
     const [wishList, setWishList]=useState([])

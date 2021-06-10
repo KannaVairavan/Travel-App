@@ -21,10 +21,10 @@ function MapGl(props) {
       {...props.viewport}
       onViewportChange={nextViewport => props.setViewport(nextViewport)}>
 
-      {props.results.map((item) => 
+      {props.results.map((item, index) => 
       {return  (
         <Marker
-        // key={`marker-${index}`}
+        key={`marker-${index}`}
         longitude={item.coords.lon}
         latitude={item.coords.lat}>
           <svg

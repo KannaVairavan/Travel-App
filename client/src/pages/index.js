@@ -58,6 +58,7 @@ function TravelApp() {
         .then((response) => {
           resultsObject.push({ id, cityName, coords, city_id, image_info, restaurant: response.data.restaurant, park: response.data.park, rv_park: response.data.rv_park, tourist_attraction: response.data.tourist_attraction });
           // add image link to the data structure
+          
           for (let i = 0; i < res.data.included.length; i++) {
             if (i > resultsObject.length - 1) {
               continue;
@@ -71,6 +72,7 @@ function TravelApp() {
               resultsObject[i].image_info.img_src = image_url;
             } 
           }
+
           resultsObject.forEach(async (item) => {
             await SearchGoatByID(item.city_id).then(async (res, index) => {
               if (res.data.data.id === item.city_id) {

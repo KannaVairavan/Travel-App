@@ -6,6 +6,10 @@ import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { SearchGoatByID } from "../../utils/SearchLocation";
+import DirectionsBusTwoToneIcon from "@material-ui/icons/DirectionsBusTwoTone";
+import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
+import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
+import FavoriteButton from "../FavoriteButton"
 import "./style.css";
 import API from "../../utils/API";
 import Card from "@material-ui/core/Card";
@@ -14,8 +18,9 @@ import CardActions from '@material-ui/core/CardActions';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CardContent from '@material-ui/core/CardContent';
 
-function LocationCard({ data },props) {
+function LocationCard({ data }, props) {
   const [results, setResults] = useState([]);
+
   const [detailedResults, setDetails] = useState([]);
 
     useEffect(() => {
@@ -28,13 +33,40 @@ function LocationCard({ data },props) {
 
     }, [data]);
 
-
   const preciseRating = (number) => {
-    return(
-      number.toPrecision(3)
-    )
-  }
+    return number.toPrecision(3);
+  };
 
+
+  const handleFormSubmit = (event, index) => {
+    console.log(index);
+    event.preventDefault();
+
+    const locationValues = results[index];
+    console.log("location data", locationValues);
+    API.savewishlist({
+      location_id: locationValues.city_id,
+      location: locationValues.cityName,
+      coords_Lat: locationValues.coords.lat,
+      coords_Lon: locationValues.coords.lon,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // const enumerateCovid = (object) => {
+  //   for (const [key, value] of Object.entries(locations.details.data.attributes.covid)
+  // }
+  const enumerateCovid = (object) => {
+    const targetURLs = [];
+    for (const [key, value] of Object.entries(object)) {
+      targetURLs.push(`${key}: ${value.url}`);
+    }
+    console.log(targetURLs);
+    return targetURLs[0].split(": ")[1];
+  };
   const handleFormSubmit=(event, index)=>{
     console.log(index);
       event.preventDefault();
@@ -42,10 +74,11 @@ function LocationCard({ data },props) {
       const locationValues = results[index]
         console.log("location data",locationValues);
         API.savewishlist({
-            location_id:locationValues.city_id,
-            location:locationValues.cityName,
-            coords_Lat:locationValues.coords.lat,
-            coords_Lon:locationValues.coords.lon
+            location_data:locationValues
+            // location_id:locationValues.city_id,
+            // location:locationValues.cityName,
+            // coords_Lat:locationValues.coords.lat,
+            // coords_Lon:locationValues.coords.lon
           })
           .then ((res)=>{
           console.log(res)
@@ -87,7 +120,6 @@ function LocationCard({ data },props) {
     
   };
 
-
   return (
     <Container className={"-results-card-body "}>
       <Row className={"-title-row"}>
@@ -103,16 +135,29 @@ function LocationCard({ data },props) {
           <Col key={index} size="md-2">
             <div className="card" style={{ width: "30rem", margin: "10px" }}>
               <img
-                src={locations.image_info.img_src== null? "https://via.placeholder.com/150.png": locations.image_info.img_src}
+                src={
+                  locations.image_info.img_src == null
+                    ? "https://via.placeholder.com/150.png"
+                    : locations.image_info.img_src
+                }
                 className="card-img-top"
                 alt="..."
               />
+              <FavoriteButton></FavoriteButton>
               <div className="card-body">
-                <h5 className="card-title" >{locations.cityName}</h5>
-
-                <p className="card-text">
-                {/* {locations.details.data.attributes.average_rating == null} ? "na" : "Tourist Rating: " {locations.details.data.attributes.average_rating} */}
-                </p>
+                <Row className="-card-header-row">
+                  <Col size={"md-8"}>
+                    <h5 className="card-title">{locations.cityName}</h5>
+                  </Col>
+                  <Col size={"md-4 rating-col"}>
+                    <h5 className="card-text city-rating-title">Rating </h5>
+                    <h5 className="card-text city-rating">
+                      {preciseRating(
+                        locations.details.data.attributes.average_rating
+                      )}
+                    </h5>
+                  </Col>
+                </Row>
               </div>
               <ul className="list-group list-group-flush">
                 {/* <li className="list-group-item cit-coordinates">
@@ -280,19 +325,49 @@ function LocationCard({ data },props) {
                 })}
               </ul>
               <div className="card-body">
-                <a href="#" className="card-link">
-                  Card link
-                </a>
-                <a href="#" className="card-link">
-                  Another link
-                </a>
-                
-                <FormBtn  onClick={(event)=>handleFormSubmit(event, index)} >Add to fav</FormBtn>
-                
+                <Row className="-card-header-row">
+                  <Col size={"md-6 card-links"}>
+                      <a
+                        href={
+                          locations.details.data.attributes.getyourguide_url
+                        }
+                        target="_blank"
+                        className={"guide-icon"}
+                      >
+                        <DirectionsBusTwoToneIcon className={"guide-icon"} />
+                      </a>
+                    <a
+                      href={locations.details.data.attributes.wikipedia_url}
+                      target="_blank"
+                      className={"guide-icon"}
+                    >
+                      <LocalLibraryIcon />
+                    </a>
+                    <a
+                      href={enumerateCovid(
+                        locations.details.data.attributes.covid
+                      )}
+                      target="_blank"
+                      className={"guide-icon"}
+                    >
+                      <LocalHospitalIcon color="secondary" />
+                    </a>
+                  </Col>
+                  <Col size={"md-6"}>
+
+
+                    <FormBtn
+                      onClick={(event) => handleFormSubmit(event, index)}
+                    >
+                      Add to fav
+                    </FormBtn>
+
+
+                  </Col>
+                </Row>
               </div>
             </div>
           </Col>
-          
         ))}
       </Row>
     </Container>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "../Grid";
+import {input, FormBtn} from '../FormBtn'
 import { SearchGoatByID } from "../../utils/SearchLocation";
 import "./style.css";
 import API from "../../utils/API";
@@ -92,7 +93,7 @@ function LocationCard({ data },props) {
                   Another link
                 </a>
                 
-                <button  onClick={(event)=>handleFormSubmit(event, index)} >Add to fav</button>
+                <FormBtn  onClick={(event)=>handleFormSubmit(event, index)} >Add to fav</FormBtn>
                 
               </div>
             </div>

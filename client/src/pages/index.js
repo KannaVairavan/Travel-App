@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Jumbotron from "../components/Jumbotron";
+// import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 // import { Input, TextArea, FormBtn } from "../components/Form";
 import { Input, FormBtn } from "../components/FormBtn";
@@ -18,8 +18,8 @@ function TravelApp() {
   const [detailsHolder, setDetails] = useState([]);
 
   const [viewport, setViewport] = useState({
-    width: 1500,
-    height: 1000,
+    width: 500,
+    height: 500,
     latitude: 38.00,
     longitude: -97.00,
     zoom: 3

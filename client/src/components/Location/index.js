@@ -64,6 +64,7 @@ function LocationCard({ data },props) {
     expandOpen: {
       transform: 'rotate(180deg)',
     },
+    
 
   }))
 
@@ -93,7 +94,8 @@ function LocationCard({ data },props) {
         {!results.length ? (
           <h1>Search for a Location</h1>
         ) : (
-          <h1> {results.length} We found your new destination! </h1>
+          // <h1> {results.length} We found your new destination! </h1>
+          <h1> We found your new destination! </h1>
         )}
       </Row>
       <Row className={"-results-row row"}>
@@ -113,10 +115,10 @@ function LocationCard({ data },props) {
                 </p>
               </div>
               <ul className="list-group list-group-flush">
-                <li className="list-group-item cit-coordinates">
+                {/* <li className="list-group-item cit-coordinates">
                   Lat: {locations.coords.lat} <br />
                   Long: {locations.coords.lon}
-                </li>
+                </li> */}
                 {/* Park Results*/}
                 <h2>
                   Park Name
@@ -128,7 +130,7 @@ function LocationCard({ data },props) {
                       <img src={park.icon} ></img>
                       <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
-                          <FavoriteIcon />
+                          
                         </IconButton>
                         <IconButton
                           className={clsx(classes.expand, {
@@ -168,7 +170,7 @@ function LocationCard({ data },props) {
                       <img src={restaurant.icon} ></img>
                       <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
-                          <FavoriteIcon />
+                          
                         </IconButton>
                         <IconButton
                           className={clsx(classes.expand, {
@@ -208,7 +210,7 @@ function LocationCard({ data },props) {
                       <img src={rv_park.icon} ></img>
                       <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
-                          <FavoriteIcon />
+                          
                         </IconButton>
                         <IconButton
                           className={clsx(classes.expand, {
@@ -248,7 +250,6 @@ function LocationCard({ data },props) {
                       <img src={tourist_attraction.icon} ></img>
                       <CardActions disableSpacing>
                         <IconButton aria-label="add to favorites">
-                          <FavoriteIcon />
                         </IconButton>
                         <IconButton
                           className={clsx(classes.expand, {

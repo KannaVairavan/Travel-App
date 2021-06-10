@@ -15,7 +15,6 @@ function TravelApp() {
   const [searchInput, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [holder, setHolder] = useState([]);
-  const [detailsHolder, setDetails] = useState([]);
 
   const [viewport, setViewport] = useState({
     width: 1500,
@@ -27,8 +26,7 @@ function TravelApp() {
 
   useEffect(() => {
     setResults(holder);
-    setDetails(detailsHolder);
-  }, [holder, detailsHolder]);
+  }, [holder]);
 
 
   const HandleInput = (e) => {
@@ -127,7 +125,7 @@ function TravelApp() {
       <Container style={{width:'400px'}} className="-results-main container-fluid">
         <LocationCard data={results}/>
       </Container>
-      <MapGl results={results} viewport={viewport} setViewport={setViewport}/>
+      {/* <MapGl results={results} viewport={viewport} setViewport={setViewport}/> */}
     </Container>
   );
 }

@@ -7,20 +7,17 @@ import API from "../../utils/API";
 
 function LocationCard({ data },props) {
   const [results, setResults] = useState([]);
-  
   const [detailedResults, setDetails] = useState([]);
 
-  
+    useEffect(() => {
+      console.log("LocationCard", data)
+      setResults(data);
+      if (data.length) {
+        // console.log(data[0].details.data.attributes.foursquare_url)
+        console.log("Passed Data: ", data );
+      } console.log('no data')
 
-  useEffect(() => {
-    console.log("LocationCard", data)
-    setResults(data );
-    if (data.length) {
-      // console.log(data[0].details.data.attributes.foursquare_url)
-      console.log("Passed Data: ", data );
-    } console.log('no data')
-
-  }, [data]);
+    }, [data]);
 
 
   const preciseRating = (number) => {
@@ -29,28 +26,23 @@ function LocationCard({ data },props) {
     )
   }
 
-  
-
-  
-   const handleFormSubmit=(event, index)=>{
+  const handleFormSubmit=(event, index)=>{
     console.log(index);
       event.preventDefault();
         
-     const locationValues = results[index]
-     console.log("location data",locationValues);
+      const locationValues = results[index]
+        console.log("location data",locationValues);
         API.savewishlist({
             location_id:locationValues.city_id,
             location:locationValues.cityName,
             coords_Lat:locationValues.coords.lat,
             coords_Lon:locationValues.coords.lon
-        })
-       .then ((res)=>{
+          })
+          .then ((res)=>{
           console.log(res)
-       })
-       .catch(err => console.log(err));
-   
-
-}
+        })
+        .catch(err => console.log(err));
+  }
 
   return (
     <Container className={"-results-card-body "}>

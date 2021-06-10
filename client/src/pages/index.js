@@ -56,7 +56,16 @@ function TravelApp() {
         //GooglePlaces API request to back end
         API.nearbySearch(coords.lat, coords.lon)
         .then((response) => {
-          resultsObject.push({ id, cityName, coords, city_id, image_info, restaurant: response.data.restaurant, park: response.data.park, rv_park: response.data.rv_park, tourist_attraction: response.data.tourist_attraction });
+          resultsObject.push
+          ({ id,
+            cityName,
+            coords,
+            city_id,
+            image_info,
+            restaurant: response.data.restaurant,
+            park: response.data.park,
+            rv_park: response.data.rv_park,
+            tourist_attraction: response.data.tourist_attraction });
           // add image link to the data structure
           
           for (let i = 0; i < res.data.included.length; i++) {
@@ -115,7 +124,7 @@ function TravelApp() {
           </Col>
         </Row>
       </Container>
-      <Container className="-results-main container-fluid">
+      <Container style={{width:'400px'}} className="-results-main container-fluid">
         <LocationCard data={results}/>
       </Container>
       <MapGl results={results} viewport={viewport} setViewport={setViewport}/>

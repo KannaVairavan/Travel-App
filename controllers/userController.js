@@ -1,4 +1,3 @@
-
 const db = require("../models");
 const router = require("../routes/api/user");
 const jsonweb = require("jsonwebtoken");
@@ -53,7 +52,7 @@ module.exports = {
           .then(dbModel => {
             if(dbModel){
               let userCheck = {username: dbModel.username, email: dbModel.email};
-              let cookie = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'})
+              let cookie = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'});
               res.json(cookie)
             }
           })

@@ -14,5 +14,12 @@ router
   .put(userController.update)
   .delete(userController.remove);
 
+router
+  .route("/signup")
+  .post(userController.create)
+router
+  .route("/login")
+  .get(userController.findById)
+
 
 module.exports = router;

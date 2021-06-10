@@ -22,10 +22,10 @@ export default {
     return axios.post("/api/user", userData);
   },
   login:function(userData){
-    return this.axios.post("/api/login", userData);
+    return this.axios.post("/api/user/login", userData);
   },
   signup: function(userData){
-    return axios.post("/api/signup", userData);
+    return axios.post("/api/user/signup", userData);
   },
   nearbySearch:function(Lat, Long){
     return axios.get('/api/nearbySearch', {

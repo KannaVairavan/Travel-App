@@ -2,11 +2,8 @@ import React from 'react';
 import { useState }  from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from "@material-ui/core/Button";
 import API from "../utils/API";
-import Dashboard from "../pages/dashboard"
 
-import {Redirect} from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +58,6 @@ export default function SignUpPage(props) {
           console.log("res-token", res);
           if (res.status === 200) {
             localStorage.setItem("usertoken", res)
-            // return (<Redirect to="/loginpage"  />   )       
            } else {
             alert('Invalid account details, failed to register.');
            }

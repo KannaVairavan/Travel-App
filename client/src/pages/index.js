@@ -124,7 +124,7 @@ function TravelApp() {
           </Col>
         </Row>
       </Container>
-      <Container className="-results-main container-fluid">
+      <Container style={{width:'400px'}} className="-results-main container-fluid">
         <LocationCard data={results}/>
       </Container>
       <MapGl results={results} viewport={viewport} setViewport={setViewport}/>

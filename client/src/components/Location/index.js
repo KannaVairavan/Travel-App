@@ -62,7 +62,6 @@ function LocationCard({ data }, props) {
     // console.log(targetURLs);
     return targetURLs[0].split(": ")[1];
   };
-
   const useStyles = makeStyles((theme) => ({
     expand: {
       transform: "rotate(0deg)",
@@ -74,7 +73,9 @@ function LocationCard({ data }, props) {
     expandOpen: {
       transform: "rotate(180deg)",
     },
+
   }));
+
 
   //React state variable
   const classes = useStyles();
@@ -100,7 +101,8 @@ function LocationCard({ data }, props) {
         {!results.length ? (
           <h1>Search for a Location</h1>
         ) : (
-          <h1> {results.length} We found your new destination! </h1>
+          // <h1> {results.length} We found your new destination! </h1>
+          <h1> We found your new destination! </h1>
         )}
       </Row>
       <Row className={"-results-row container-fluid"}>
@@ -188,7 +190,7 @@ function LocationCard({ data }, props) {
                   {/* <li className="list-group-item cit-coordinates">
                   Lat: {locations.coords.lat} <br />
                   Long: {locations.coords.lon}
-                </li>
+                </li> */}
                 {/* Park Results*/}
                   <h2>Park Name</h2>
                   {locations.park.map((park, index) => {
@@ -255,7 +257,6 @@ function LocationCard({ data }, props) {
                             <ExpandMoreIcon />
                           </IconButton>
                         </CardActions>
-
                         <Collapse
                           in={expanded.restaurant[index]}
                           timeout="auto"

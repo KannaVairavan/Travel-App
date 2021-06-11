@@ -12,8 +12,10 @@ function Dashboard ({authorized}) {
   }
   else{
   return <div>
+
     {/* <GoogleMap/> */}
     {/* <TravelApp/> */}
+
     <Wishlist/>
   </div>;
 

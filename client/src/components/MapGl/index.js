@@ -23,7 +23,7 @@ function MapGl(props) {
       onViewportChange={nextViewport => props.setViewport(nextViewport)}>
         {console.log("mapgl1: ", props.results)}
       {props.results.map((item, index) => 
-      {return  (
+      (
         <Marker
         key={`marker-${index}`}
         
@@ -42,7 +42,7 @@ function MapGl(props) {
         </Marker>
       )
       
-      })}
+      )}
     </ReactMapGL>
 
     </div>

@@ -43,10 +43,8 @@ function LocationCard({ data }, props) {
     const locationValues = results[index];
     // console.log("location data", locationValues);
     API.savewishlist({
-      location_id: locationValues.city_id,
-      location: locationValues.cityName,
-      coords_Lat: locationValues.coords.lat,
-      coords_Lon: locationValues.coords.lon,
+      location_data:locationValues
+     
     })
       .then((res) => {
         console.log(res);

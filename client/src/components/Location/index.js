@@ -17,11 +17,10 @@ import Collapse from "@material-ui/core/Collapse";
 import CardActions from "@material-ui/core/CardActions";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import CardContent from "@material-ui/core/CardContent";
+import PerksCard from "../PerksCard";
 
 function LocationCard({ data }, props) {
   const [results, setResults] = useState([]);
-
-  const [detailedResults, setDetails] = useState([]);
 
   useEffect(() => {
     console.log("LocationCard", data);
@@ -73,9 +72,7 @@ function LocationCard({ data }, props) {
     expandOpen: {
       transform: "rotate(180deg)",
     },
-
   }));
-
 
   //React state variable
   const classes = useStyles();
@@ -107,15 +104,12 @@ function LocationCard({ data }, props) {
       </Row>
       <Row className={"-results-row container-fluid"}>
         {results.map((locations, index) => (
-          <Col
-            size={"md-12 location-main-results-container"}
-            key={`col-1-${index}`}
-          >
+          <Col size={"md-12 location-main-results-container"} key={`col-1-${index}`}>
             <Col size={"md-2 location-primary-results"} key={`col-2-${index}`}>
               <Col key={index} size="md-2">
                 <div
                   className="card"
-                  style={{ width: "30rem", margin: "10px" }}
+                  style={{ width: "20rem", margin: "10px" }}
                 >
                   <img
                     src={
@@ -126,7 +120,6 @@ function LocationCard({ data }, props) {
                     className="card-img-top"
                     alt="..."
                   />
-                  <FavoriteButton></FavoriteButton>
                   <div className="card-body">
                     <Row className="-card-header-row">
                       <Col size={"md-8"} key={`col-4-${index}`}>
@@ -153,14 +146,17 @@ function LocationCard({ data }, props) {
                           target="_blank"
                           className={"guide-icon"}
                         >
-                          <DirectionsBusTwoToneIcon className={"guide-icon"} />
+                          <DirectionsBusTwoToneIcon
+                            className={"guide-icon"}
+                            fontSize={"large"}
+                          />
                         </a>
                         <a
                           href={locations.details.data.attributes.wikipedia_url}
                           target="_blank"
                           className={"guide-icon"}
                         >
-                          <LocalLibraryIcon />
+                          <LocalLibraryIcon fontSize={"large"} />
                         </a>
                         <a
                           href={enumerateCovid(
@@ -169,7 +165,10 @@ function LocationCard({ data }, props) {
                           target="_blank"
                           className={"guide-icon"}
                         >
-                          <LocalHospitalIcon color="secondary" />
+                          <LocalHospitalIcon
+                            color="secondary"
+                            fontSize={"large"}
+                          />
                         </a>
                       </Col>
                       <Col size={"md-6"} key={`col-7-${index}`}>
@@ -184,193 +183,36 @@ function LocationCard({ data }, props) {
                 </div>
               </Col>
             </Col>
-            <Row className={"-perks"}>
+            <Col size={"md-3 perks-results"} key={`col-1-${index}`}>
               <Col size={"md-2 location-perks"}>
                 <ul className="list-group list-group-flush">
-                  {/* <li className="list-group-item cit-coordinates">
-                  Lat: {locations.coords.lat} <br />
-                  Long: {locations.coords.lon}
-                </li> */}
-                {/* Park Results*/}
-                  <h2>Park Name</h2>
-                  {locations.park.map((park, index) => {
-                    return (
-                      <Card key={`park-index-${index}`}>
-                        {park.name}
-                        <img src={park.icon}></img>
-                        <CardActions disableSpacing>
-                          <IconButton aria-label="add to favorites">
-                            <FavoriteIcon />
-                          </IconButton>
-                          <IconButton
-                            className={clsx(classes.expand, {
-                              [classes.expandOpen]: expanded.park[index],
-                            })}
-                            onClick={() => handleExpandClick(index, "park")}
-                            aria-expanded={expanded.park[index]}
-                            aria-label="show more"
-                          >
-                            <ExpandMoreIcon />
-                          </IconButton>
-                        </CardActions>
-
-                        <Collapse
-                          in={expanded.park[index]}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          <CardContent>
-                            <ul>
-                              <li key={`park-vicinity ${index}`}>
-                                {park.vicinity}
-                              </li>
-                              <li key={`park-rating ${index}`}>
-                                {park.rating}
-                              </li>
-                            </ul>
-                          </CardContent>
-                        </Collapse>
-                      </Card>
-                    );
-                  })}
-                  {/* Restaurant Results*/}
+                  <h2>Parks</h2>
+                  <PerksCard
+                    target={locations.park}
+                    title={"Parks"}
+                    key={"perks-card-1"}
+                  ></PerksCard>
                   <h2>Restaurants</h2>
-                  {locations.restaurant.map((restaurant, index) => {
-                    return (
-                      <Card key={`restaurant-index-${index}`}>
-                        {restaurant.name}
-                        <img src={restaurant.icon}></img>
-                        <CardActions disableSpacing>
-                          <IconButton aria-label="add to favorites">
-                            <FavoriteIcon />
-                          </IconButton>
-                          <IconButton
-                            className={clsx(classes.expand, {
-                              [classes.expandOpen]: expanded.restaurant[index],
-                            })}
-                            onClick={() =>
-                              handleExpandClick(index, "restaurant")
-                            }
-                            aria-expanded={expanded.restaurant[index]}
-                            aria-label="show more"
-                          >
-                            <ExpandMoreIcon />
-                          </IconButton>
-                        </CardActions>
-                        <Collapse
-                          in={expanded.restaurant[index]}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          <CardContent>
-                            <ul>
-                              <li key={`restaurant-vicinity ${index}`}>
-                                {restaurant.vicinity}
-                              </li>
-                              <li key={`restaurant-rating ${index}`}>
-                                {restaurant.rating}
-                              </li>
-                            </ul>
-                          </CardContent>
-                        </Collapse>
-                      </Card>
-                    );
-                  })}
-                  {/* RV Parks Results*/}
+                  <PerksCard
+                    target={locations.restaurant}
+                    title={"Restaurant"}
+                    key={"perks-card-2"}
+                  ></PerksCard>
                   <h2>RV Parks</h2>
-                  {locations.rv_park.map((rv_park, index) => {
-                    return (
-                      <Card key={`rv_park-${index}`}>
-                        {rv_park.name}
-                        <img src={rv_park.icon}></img>
-                        <CardActions disableSpacing>
-                          <IconButton aria-label="add to favorites">
-                            <FavoriteIcon />
-                          </IconButton>
-                          <IconButton
-                            className={clsx(classes.expand, {
-                              [classes.expandOpen]: expanded.rv_park[index],
-                            })}
-                            onClick={() => handleExpandClick(index, "rv_park")}
-                            aria-expanded={expanded.rv_park[index]}
-                            aria-label="show more"
-                          >
-                            <ExpandMoreIcon />
-                          </IconButton>
-                        </CardActions>
-
-                        <Collapse
-                          in={expanded.rv_park[index]}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          <CardContent>
-                            <ul>
-                              <li key={`rv_park-vicinity ${index}`}>
-                                {rv_park.vicinity}
-                              </li>
-                              <li key={`rv_park-rating ${index}`}>
-                                {rv_park.rating}
-                              </li>
-                            </ul>
-                          </CardContent>
-                        </Collapse>
-                      </Card>
-                    );
-                  })}
-                  {/* Tourist Attraction Results*/}
+                  <PerksCard
+                    target={locations.rv_park}
+                    title={"rv_park"}
+                    key={"perks-card-3"}
+                  ></PerksCard>
                   <h2>Tourist Attractions</h2>
-                  {locations.tourist_attraction.map(
-                    (tourist_attraction, index) => {
-                      return (
-                        <Card key={`tourist_attraction-${index}`}>
-                          {tourist_attraction.name}
-                          <img src={tourist_attraction.icon}></img>
-                          <CardActions disableSpacing>
-                            <IconButton aria-label="add to favorites">
-                              <FavoriteIcon />
-                            </IconButton>
-                            <IconButton
-                              className={clsx(classes.expand, {
-                                [classes.expandOpen]:
-                                  expanded.tourist_attraction[index],
-                              })}
-                              onClick={() =>
-                                handleExpandClick(index, "tourist_attraction")
-                              }
-                              aria-expanded={expanded.tourist_attraction[index]}
-                              aria-label="show more"
-                            >
-                              <ExpandMoreIcon />
-                            </IconButton>
-                          </CardActions>
-
-                          <Collapse
-                            in={expanded.tourist_attraction[index]}
-                            timeout="auto"
-                            unmountOnExit
-                          >
-                            <CardContent>
-                              <ul>
-                                <li
-                                  key={`tourist_attraction-vicinity ${index}`}
-                                >
-                                  {" "}
-                                  {tourist_attraction.vicinity}
-                                </li>
-                                <li key={`tourist_attraction-rating ${index}`}>
-                                  {tourist_attraction.rating}
-                                </li>
-                              </ul>
-                            </CardContent>
-                          </Collapse>
-                        </Card>
-                      );
-                    }
-                  )}
+                  <PerksCard
+                    target={locations.tourist_attraction}
+                    title={"tourist_attraction"}
+                    key={"perks-card-4"}
+                  ></PerksCard>
                 </ul>
               </Col>
-            </Row>
+            </Col>
           </Col>
         ))}
       </Row>

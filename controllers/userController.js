@@ -32,17 +32,17 @@ module.exports = {
       },
       login: function(req,res){
         db.User
-          .findOne({ username: req.body.username})
+          .findOne({ email: req.body.email})
           .then(dbModel => {
             if(!dbModel){
               res.status(500).json("No user found");
             }
-            let checkPassword = bcrypt.compare(req.body.password, dbModel.password);
-            if(checkPassword){
-              let userCheck = {username: dbModel.username, email: dbModel.email};
-              let token = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'})
-              res.json(token)
-            }
+            // let checkPassword = bcrypt.compare(req.body.password, dbModel.password);
+            // if(checkPassword){
+            //   let userCheck = {email: dbModel.email};
+            //   let token = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'})
+            //   res.json(token)
+            // }
           })
           .catch(err => res.status(422).json(err));
       },
@@ -51,7 +51,7 @@ module.exports = {
           .create(req.body)
           .then(dbModel => {
             if(dbModel){
-              let userCheck = {username: dbModel.username, email: dbModel.email};
+              let userCheck = {email: dbModel.email};
               let cookie = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'});
               res.json(cookie)
             }

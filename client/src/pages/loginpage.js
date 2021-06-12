@@ -37,12 +37,13 @@ export default function LoginPage () {
     console.log(formObject.email);
     console.log(formObject.password);
     if(formObject.email && formObject.password){
+    console.log("testing1")
     API.login({
       email: formObject.email,
       password: formObject.password
     })
-
-    .then((res) => {
+    .then((res) => { 
+      console.log("testing3")
       console.log("res login" , res);
       if(res.status === 200){
         localStorage.setItem("usertoken", res)
@@ -57,7 +58,7 @@ export default function LoginPage () {
     }))
     .catch(err => console.log(err));
 
-    }
+  }
   }
   return (
   <form className={classes.root} noValidate autoComplete="off">

@@ -19,7 +19,7 @@ router
   .post(userController.create)
 router
   .route("/login")
-  .get(userController.findById)
-
+  .post(userController.login)
+  .get(userController.login)
 
 module.exports = router;

@@ -47,18 +47,20 @@ const UserSchema = new Schema({
   });
 
 
-  UserSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.password);
-  };
+  // UserSchema.methods.matchPassword = async function (enteredPassword) {
+  //   return await bcrypt.compare(enteredPassword, this.password);
+  // };
+
+  // const signJwt = (id)
   
-  // will encrypt password everytime its saved
-  UserSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) {
-      next();
-    }
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-  });
+  // // will encrypt password everytime its saved
+  // UserSchema.pre("save", async function (next) {
+  //   if (!this.isModified("password")) {
+  //     next();
+  //   }
+  //   const salt = await bcrypt.genSalt(10);
+  //   this.password = await bcrypt.hash(this.password, salt);
+  // });
   
 const User = mongoose.model("User", UserSchema);
 

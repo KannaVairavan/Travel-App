@@ -16,44 +16,43 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUpPage(props) {
   const classes = useStyles();
-  const [signup, setSignup]=useState([])
-  const [formObject, setFormObject]=useState({
+
+  const [register, setRegister] = useState(false);
+
+  const [formObject, setFormObject] = useState({
     firstName:"",
     lastName:"",
     email:"",
     password:""
-
-
   })
 
-  const [submitted, setSubmitted]=useState(false);
- 
+  // const signupUser = async (firstName, lastName, email,password) => {
+  //   try {
+  //     const config = {headers: { 'Content-Type': 'application/json'}}
+  //     const body = { firstName, lastName, email, password}
+  //     const res = await API.signup(body);
+  //     console.log(res)
+  //   } catch (err){
+  //     console.log(err)
+  //   }
+  // }
 
-  function loadTrip() {
-   
-  };
   // Update wishlist by id
   function handleInputChange(event) {
     const { name, value } = event.target;
     setFormObject({...formObject, [name]: value})
   };
 
+  
   const handleFormSubmit = e => {
-    e.preventDefault();
-     setSubmitted(true);
-    
-    console.log("email is " + formObject.email);
-    console.log("password is " + formObject.password);
-    console.log("firstname is " + formObject.firstName);
-    console.log("lastname is " + formObject.lastName);
+      e.preventDefault();
     if (formObject.email && formObject.password) {
-      API.signup({
-        firstName: formObject.firstName,
-        lastName: formObject.lastName,
-        email: formObject.email,
-        password:formObject.password
-      })
-      
+      API.signup( setFormObject({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password:""
+      }))  
       .then ((res)=>{
           console.log("res-token", res);
           if (res.status === 200) {
@@ -62,15 +61,9 @@ export default function SignUpPage(props) {
             alert('Invalid account details, failed to register.');
            }
       })
-      .then(() => setFormObject({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password:""
-      }))
            
         .catch(err => console.log(err));
-    }
+    
   };
 
   return (
@@ -90,7 +83,7 @@ export default function SignUpPage(props) {
           
          
         />
-        {submitted && !formObject.firstName ? <span> Please enter first name</span>:null}
+        {/* {submitted && !formObject.firstName ? <span> Please enter first name</span>:null} */}
        
         <TextField
           id="standard-textarea"
@@ -102,7 +95,7 @@ export default function SignUpPage(props) {
           value={formObject.lastName}
           onChange={handleInputChange}
         />
-           {submitted && !formObject.lastName ? <span> Please enter last name</span>:null}
+           {/* {submitted && !formObject.lastName ? <span> Please enter last name</span>:null} */}
         <TextField
           id="standard-textarea"
           label="Email Address"
@@ -113,7 +106,7 @@ export default function SignUpPage(props) {
           value={formObject.email}
           onChange={handleInputChange}
         />
-           {submitted && !formObject.email ? <span> Please enter email</span>:null}
+           {/* {submitted && !formObject.email ? <span> Please enter email</span>:null} */}
         <TextField
           id="outlined-password-input"
           label="Password"
@@ -137,4 +130,5 @@ export default function SignUpPage(props) {
     </form>
  
   );
+}
 }

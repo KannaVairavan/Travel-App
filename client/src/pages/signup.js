@@ -87,8 +87,6 @@ export default function SignUpPage(props) {
           name="firstName"
           value={formObject.firstName}
           onChange={handleInputChange}
-          
-         
         />
         {submitted && !formObject.firstName ? <span> Please enter first name</span>:null}
        

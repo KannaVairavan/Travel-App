@@ -18,42 +18,64 @@ import API from "../../utils/API";
   
 
 
-  const handleFormSubmit = (event, username, password) => {
-  // Preventing the default behavior of the form submit (which is to refresh the page)
-    event.preventDefault();
-    console.log(username);
-    console.log(password);
-    API.login({username, password})
+  // const handleFormSubmit = (event, email, password) => {
+  // // Preventing the default behavior of the form submit (which is to refresh the page)
+  //   event.preventDefault();
+  //   console.log(email);
+  //   console.log(password);
+  //   API.login({email, password})
 
-    .then((res) => {
-      console.log("res login" , res);
+  //   .then((res) => {
+  //     console.log("res login" , res);
 
-      if(res.status === 200){
-        localStorage.setItem("usertoken", res)
-      } else {
-        alert("cannot login");
-      }
-    })
+  //     if(res.status === 200){
+  //       localStorage.setItem("usertoken", res)
+  //       alert("User is logged in")
+  //     } else {
+  //       alert("cannot login");
+  //     }
+  //   })
   
-  }
+  // }
 
 
 
   const Form = () => {
     const classes = useStyles();
-    const [username, setUsername] = React.useState("");
+    const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+     
+
+
+      const handleFormSubmit = (event, email, password) => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+      event.preventDefault();
+      console.log(email);
+      console.log(password);
+      API.login({email, password})
+  
+      .then((res) => {
+        console.log("res login" , res);
+  
+        if(res.status === 200){
+          localStorage.setItem("usertoken", res)
+          alert("User is logged in")
+        } else {
+          alert("cannot login");
+        }
+      })
     
+    }
     return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>
           <TextField
           onChange= {(event) => {
-            setUsername(event.target.value)
+            setEmail(event.target.value)
           }}
-          value= {username}
+          value= {email}
           id="standard-textarea"
-          label="Username"
+          label="Email"
           placeholder="Required"
           multiline
           variant="outlined"
@@ -72,7 +94,7 @@ import API from "../../utils/API";
         />
         <Button
           onClick={(event) => {
-            handleFormSubmit(username, password)
+            handleFormSubmit(email, password)
           }}
           variant="contained" color="primary">
             Submit
@@ -82,6 +104,6 @@ import API from "../../utils/API";
     );
 
 
-  }
+}
 
 export default Form;

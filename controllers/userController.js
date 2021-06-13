@@ -44,6 +44,7 @@ module.exports = {
             //   let token = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'})
             //   res.json(token)
             // }
+            res.json(dbModel)
           })
           .catch(err => res.status(422).json(err));
       },

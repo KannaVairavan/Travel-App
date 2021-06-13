@@ -31,36 +31,32 @@ export default function LoginPage() {
   const handleFormSubmit = (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
-    // console.log(formObject.email);
-    // console.log(formObject.password);
+    console.log(formObject.email);
+    console.log(formObject.password);
+    if(formObject.email && formObject.password){
+    console.log("testing1")
+    API.login({
+      email: formObject.email,
+      password: formObject.password
+    })
+    .then((res) => { 
+      console.log("testing3")
+      console.log("res login" , res);
+      if(res.status === 200){
+        localStorage.setItem("usertoken", res)
+        alert("User is logged in")
+      } else {
+        alert("cannot login");
+      }
+    })
+    .then(() => setFormObject({
+      email: "",
+      password:""
+    }))
+    .catch(err => console.log(err));
 
-    if (formObject.email && formObject.password) {
-
-      API.login({
-        email: formObject.email,
-        password: formObject.password,
-        
-      })
-
-        .then((res) => {
-          console.log("res login", res);
-          if (res.status === 200) {
-            localStorage.setItem("usertoken", res);
-            alert("User is logged in");
-          } else {
-            alert("cannot login");
-          }
-        })
-        .then(() =>
-          setFormObject({
-            email: "",
-            password: "",
-          })
-        )
-        .catch((err) => console.log(err));
-    }
-  };
-
+  }
+  }
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>

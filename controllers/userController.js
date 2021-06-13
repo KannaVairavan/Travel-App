@@ -30,9 +30,10 @@ module.exports = {
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err));
       },
-      login: function(req,res){
+      login: function(req, res){
+        console.log("userController ")
         db.User
-          .findOne({ email: req.body.email})
+          .findOne({email: req.body.params})
           .then(dbModel => {
             if(!dbModel){
               res.status(500).json("No user found");

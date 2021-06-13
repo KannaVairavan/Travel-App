@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import NatureIcon from "@material-ui/icons/Nature";
 
 function PerksCard(props) {
   const useStyles = makeStyles((theme) => ({
@@ -42,32 +43,30 @@ function PerksCard(props) {
     setExpanded({ ...expanded, [key]: currentValues });
   };
 
-  return props.target.map((park, index) => (
+  return props.target.map((item, index) => (
     <Container fluid>
+
       <Card key={`${props.title}-index-${index}`}>
-        {park.name}
-        <img src={park.icon}></img>
+        {item.name}
+        <img src={item.icon} fontSize={"small"} key={`${props.title}-img-${index}`}></img>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
           <IconButton
             className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded.park[index],
+              [classes.expandOpen]: expanded[`${props.title}`][index],
             })}
-            onClick={() => handleExpandClick(index, "park")}
-            aria-expanded={expanded.park[index]}
+            onClick={() => handleExpandClick(index, `${props.title}`)}
+            aria-expanded={expanded[`${props.title}`][index]}
             aria-label="show more"
           >
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
 
-        <Collapse in={expanded.park[index]} timeout="auto" unmountOnExit>
+        <Collapse in={expanded[`${props.title}`][index]} timeout="auto" unmountOnExit>
           <CardContent>
-            <ul>
-              <li key={`${props.title}-vicinity ${index}`}>{park.vicinity}</li>
-              <li key={`${props.title}-rating ${index}`}>{park.rating}</li>
+            <ul key={`${props.title}-ul-${index}`}>
+              <li key={`${props.title}-vicinity ${index}`}>{item.vicinity}</li>
+              <li key={`${props.title}-rating ${index}`}>{item.rating}</li>
             </ul>
           </CardContent>
         </Collapse>

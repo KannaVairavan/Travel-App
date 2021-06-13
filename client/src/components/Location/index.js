@@ -1,29 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "../Grid";
 import { input, FormBtn } from "../FormBtn";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import { SearchGoatByID } from "../../utils/SearchLocation";
 import DirectionsBusTwoToneIcon from "@material-ui/icons/DirectionsBusTwoTone";
 import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import LocalLibraryIcon from "@material-ui/icons/LocalLibrary";
 import FavoriteButton from "../FavoriteButton";
 import "./style.css";
 import API from "../../utils/API";
-import Card from "@material-ui/core/Card";
-import Collapse from "@material-ui/core/Collapse";
-import CardActions from "@material-ui/core/CardActions";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import CardContent from "@material-ui/core/CardContent";
 import PerksCard from "../PerksCard";
+import Accordion from "../Accordion";
+import MapGl from "../MapGl";
 
 function LocationCard({ data }, props) {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    console.log("LocationCard", data);
 
     if (data.length) {
       setResults(data);
@@ -36,14 +27,14 @@ function LocationCard({ data }, props) {
   };
 
   const handleFormSubmit = (event, index) => {
-    // console.log(index);
     event.preventDefault();
 
     const locationValues = results[index];
-    // console.log("location data", locationValues);
     API.savewishlist({
-      location_data:locationValues
-     
+      location_id: locationValues.city_id,
+      location: locationValues.cityName,
+      coords_Lat: locationValues.coords.lat,
+      coords_Lon: locationValues.coords.lon,
     })
       .then((res) => {
         console.log(res);
@@ -59,52 +50,20 @@ function LocationCard({ data }, props) {
     // console.log(targetURLs);
     return targetURLs[0].split(": ")[1];
   };
-  const useStyles = makeStyles((theme) => ({
-    expand: {
-      transform: "rotate(0deg)",
-      marginLeft: "auto",
-      transition: theme.transitions.create("transform", {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: "rotate(180deg)",
-    },
-  }));
-
-  //React state variable
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState({
-    park: [false, false, false],
-    restaurant: [false, false, false],
-    rv_park: [false, false, false],
-    tourist_attraction: [false, false, false],
-  });
-
-  const handleExpandClick = (index, key) => {
-    // console.log("index", index, key);
-    // console.log("expanded", expanded);
-
-    const currentValues = expanded[key];
-    currentValues[index] = !currentValues[index];
-    setExpanded({ ...expanded, [key]: currentValues });
-  };
 
   return (
     <Container className={"-results-card-body "}>
       <Row className={"-title-row"}>
-        {!results.length ? (
-          <h1>Search for a Location</h1>
-        ) : (
-          // <h1> {results.length} We found your new destination! </h1>
-          <h1> We found your new destination! </h1>
-        )}
+        {!results.length ? ( <h1>Planning a trip?</h1> ) : ( <h1> We found your new destination! <br /> <br /> </h1> )}
       </Row>
-      <Row className={"-results-row container-fluid"}>
+      <Row className={"-results"}>
         {results.map((locations, index) => (
-          <Col size={"md-12 location-main-results-container"} key={`col-1-${index}`}>
-            <Col size={"md-2 location-primary-results"} key={`col-2-${index}`}>
-              <Col key={index} size="md-2">
+          <Container fluid >
+            <Row className={"-results-body"} >
+              <Col
+                size={"md-6 location-primary-results"}
+                
+              >
                 <div
                   className="card"
                   style={{ width: "20rem", margin: "10px" }}
@@ -116,15 +75,18 @@ function LocationCard({ data }, props) {
                         : locations.image_info.img_src
                     }
                     className="card-img-top"
-                    alt="..."
+                    alt={`City of ${locations.cityName}`}
                   />
                   <div className="card-body">
                     <Row className="-card-header-row">
-                      <Col size={"md-8"} key={`col-4-${index}`}>
+                      <Col size={"md-8"}>
                         <h5 className="card-title">{locations.cityName}</h5>
                       </Col>
-                      <Col size={"md-4 rating-col"} key={`col-5-${index}`}>
-                        <h5 className="card-text city-rating-title">Rating </h5>
+                      <Col size={"md-4 rating"} >
+                        <h5 className="card-text city-rating-title">
+                          
+                          Rating
+                        </h5>
                         <h5 className="card-text city-rating">
                           {preciseRating(
                             locations.details.data.attributes.average_rating
@@ -136,7 +98,7 @@ function LocationCard({ data }, props) {
 
                   <div className="card-body">
                     <Row className="-card-header-row">
-                      <Col size={"md-6 card-links"} key={`col-6-${index}`}>
+                      <Row className={"md-6 card-links"} >
                         <a
                           href={
                             locations.details.data.attributes.getyourguide_url
@@ -168,8 +130,8 @@ function LocationCard({ data }, props) {
                             fontSize={"large"}
                           />
                         </a>
-                      </Col>
-                      <Col size={"md-6"} key={`col-7-${index}`}>
+                      </Row>
+                      <Col size={"md-6"} >
                         <FormBtn
                           onClick={(event) => handleFormSubmit(event, index)}
                         >
@@ -180,38 +142,45 @@ function LocationCard({ data }, props) {
                   </div>
                 </div>
               </Col>
-            </Col>
-            <Col size={"md-3 perks-results"} key={`col-1-${index}`}>
-              <Col size={"md-2 location-perks"}>
-                <ul className="list-group list-group-flush">
-                  <h2>Parks</h2>
-                  <PerksCard
-                    target={locations.park}
+              <Col size={"md-6 location-perks"} >
+                <Row className={"-accordion"}>
+                  <Accordion
                     title={"Parks"}
-                    key={"perks-card-1"}
-                  ></PerksCard>
-                  <h2>Restaurants</h2>
-                  <PerksCard
-                    target={locations.restaurant}
-                    title={"Restaurant"}
-                    key={"perks-card-2"}
-                  ></PerksCard>
-                  <h2>RV Parks</h2>
-                  <PerksCard
-                    target={locations.rv_park}
-                    title={"rv_park"}
-                    key={"perks-card-3"}
-                  ></PerksCard>
-                  <h2>Tourist Attractions</h2>
-                  <PerksCard
-                    target={locations.tourist_attraction}
-                    title={"tourist_attraction"}
-                    key={"perks-card-4"}
-                  ></PerksCard>
-                </ul>
+                    id={"Parks"}
+                  >
+                    <PerksCard
+                      target={locations.park}
+                      title={"park"}
+                    ></PerksCard>
+                  </Accordion>
+                  <Accordion title={"Restaurants"} id={"Restaurants"}>
+                    <PerksCard
+                      target={locations.restaurant}
+                      title={"restaurant"}
+                    ></PerksCard>
+                  </Accordion>
+                  <Accordion title={"RV Parks"} id={"RV-Parks"}>
+                    <PerksCard
+                      target={locations.rv_park}
+                      title={"rv_park"}
+                    ></PerksCard>
+                  </Accordion>
+                  <Accordion
+                    title={"Tourist Attractions"}
+                    id={"Tourist-Attractions"}
+                  >
+                    <PerksCard
+                      target={locations.tourist_attraction}
+                      title={"tourist_attraction"}
+                    ></PerksCard>
+                  </Accordion>
+                </Row>
+                <Row className={"-map"} >
+                  <MapGl coords={locations.coords} />
+                </Row>
               </Col>
-            </Col>
-          </Col>
+            </Row>
+          </Container>
         ))}
       </Row>
     </Container>

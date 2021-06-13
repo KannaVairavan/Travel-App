@@ -2,6 +2,10 @@
   margin-top: 20px;
 }
 
+.container-fluid {
+  min-width: fit-content !important;
+}
+
 .container-results-card-body {
   display: flex;
   flex-direction: column;
@@ -9,8 +13,19 @@
   flex-wrap: wrap;
 }
 
-.row-results-row {
+.row-results {
+  min-width:fit-content;
   justify-content: space-evenly;
+}
+
+.row-results-body {
+  display: flex;
+  min-width: fit-content !important;
+
+}
+
+.row-map {
+  margin-top: 15px;
 }
 
 .col-md-2 {
@@ -24,8 +39,11 @@
   justify-content: space-between;
   align-items: center;
 }
-.col-rating-col {
-  justify-content: center;
+.col-rating {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
 
 .city-rating {
@@ -54,5 +72,12 @@
 
   .col-location-main-results-container {
     display:flex;
-    
+  }
+
+  .col-location-primary-results{
+    min-width:fit-content;
+  }
+
+  .col-location-perks {
+    min-width:fit-content;
   }

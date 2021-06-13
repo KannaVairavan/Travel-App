@@ -126,7 +126,7 @@ function Wishlist(){
                 <h3>No Results to Display</h3>
             )}            */}
 
-            <MapGl results={locdata} viewport={viewport} setViewport={setViewport}/>
+            {/* <MapGl results={locdata} viewport={viewport} setViewport={setViewport}/> */}
             
         </Container>
     )

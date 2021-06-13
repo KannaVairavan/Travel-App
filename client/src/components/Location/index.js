@@ -58,7 +58,7 @@ function LocationCard({ data }, props) {
       </Row>
       <Row className={"-results"}>
         {results.map((locations, index) => (
-          <Container fluid >
+          <Container fluid key = {`card-holder-${index}`}>
             <Row className={"-results-body"} >
               <Col
                 size={"md-6 location-primary-results"}

@@ -3,6 +3,7 @@ import { useState }  from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import API from "../utils/API";
+import {Redirect} from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,6 +25,7 @@ export default function LoginPage () {
     email:"",
     password:""
   })
+  
 
 
   function handleInputChange(event) {
@@ -46,7 +48,8 @@ export default function LoginPage () {
       console.log("testing3")
       console.log("res login" , res);
       if(res.status === 200){
-        localStorage.setItem("usertoken", res)
+        localStorage.setItem("user", res.data.email)
+        setLoggedIn(true);
         alert("User is logged in")
       } else {
         alert("cannot login");
@@ -60,6 +63,10 @@ export default function LoginPage () {
 
   }
   }
+
+  if(loggedIn === true){
+    return <Redirect to="/dashboard"/>
+  } else{
   return (
   <form className={classes.root} noValidate autoComplete="off">
     <div>
@@ -97,4 +104,4 @@ export default function LoginPage () {
   );
 }
 
-
+}

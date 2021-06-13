@@ -5,21 +5,20 @@ import {Redirect} from 'react-router-dom';
 import TravelApp from "../pages/index";
 
 
-function Dashboard ({authorized}) {
+function Dashboard (props) {
 
-  if(!authorized){
-    return <Redirect to="/signup"/>
-  }
-  else{
-  return <div>
+
+  return (
+  <div>
 
     {/* <GoogleMap/> */}
     {/* <TravelApp/> */}
 
     <Wishlist/>
-  </div>;
+  </div>
 
-  }
+)
 }
+
 
 export default Dashboard;

@@ -1,6 +1,6 @@
 const db = require("../models");
 const router = require("../routes/api/user");
-const jsonweb = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const bcrypt =  require("bcrypt");
 // get data and post data to User model
 module.exports = {

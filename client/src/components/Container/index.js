@@ -1,11 +1,10 @@
 import React from "react";
-import './style.css'
+import "./style.css";
 
 function Container(props) {
   return (
-    <div 
-    className={props.className} 
-    style={props.style}>{props.children}
+    <div className={props.className} style={props.style}>
+      {props.children}
     </div>
   );
 }

@@ -17,9 +17,9 @@ router
 router
   .route("/signup")
   .post(userController.create)
+
 router
   .route("/login")
-  .post(userController.login)
   .get(userController.login)
 
 module.exports = router;

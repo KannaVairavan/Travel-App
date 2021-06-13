@@ -9,10 +9,12 @@ export default {
   getwishlist: function(id) {
     return axios.get("/api/wishlist/" + id);
   },
+  
   // Deletes the wishlist with the given id
   deletewishlist: function(id) {
     return axios.delete("/api/wishlist/" + id);
   },
+
   // Saves a wishlist to the database
   savewishlist: function(wishlistData) {
     return axios.post("/api/wishlist", wishlistData);
@@ -21,12 +23,17 @@ export default {
   saveUser:function(userData){
     return axios.post("/api/user", userData);
   },
+
   login:function(userData){
+    console.log(userData)
     return axios.post("/api/user/login", userData);
   },
+
   signup: function(userData){
+    console.log(userData)
     return axios.post("/api/user/signup", userData);
   },
+
   nearbySearch:function(Lat, Long){
     return axios.get('/api/nearbySearch', {
       params: {
@@ -35,10 +42,5 @@ export default {
       }
     });
   }
-
-// getCampgroundSearch: function () {
-//   return axios.get()
-
-// }
 
 };

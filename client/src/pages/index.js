@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-// import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
-// import { Input, TextArea, FormBtn } from "../components/Form";
 import { Input, FormBtn } from "../components/FormBtn";
 import { SearchGoat, SearchGoatByID } from "../utils/SearchLocation";
 import LocationCard from "../components/Location";
-import MapGl from "../components/MapGl";
 
 
 
@@ -16,13 +12,7 @@ function TravelApp() {
   const [results, setResults] = useState([]);
   const [holder, setHolder] = useState([]);
 
-  const [viewport, setViewport] = useState({
-    width: 500,
-    height: 500,
-    latitude: 38.00,
-    longitude: -97.00,
-    zoom: 3
-  });
+
 
   useEffect(() => {
     setResults(holder);
@@ -108,7 +98,8 @@ function TravelApp() {
                 }}
                 name="input"
                 value={searchInput}
-                placeholder="Search for a location"
+                placeholder="Where do you want to go?"
+                required
               />
               <FormBtn
                 stylename={"location-search"}
@@ -125,7 +116,6 @@ function TravelApp() {
       <Container style={{width:'400px'}} className="-results-main container-fluid">
         <LocationCard data={results}/>
       </Container>
-      {/* <MapGl results={results} viewport={viewport} setViewport={setViewport}/> */}
     </Container>
   );
 }

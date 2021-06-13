@@ -24,6 +24,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function App() {
   const [loggedIn, setloggedIn] = useState(false);
+  console.log("loggedIn1", loggedIn);
+  let localSaved = localStorage.getItem("user");
+  useEffect (() => {
+    if(localSaved){
+      setloggedIn(true);
+      console.log("loggedin2", loggedIn);
+    }
+  })
+
  const classes = useStyles();
  return (
      <div className = {`${classes.container} ${classes.root}`}>
@@ -31,7 +40,7 @@ export default function App() {
          <SearchAppBar />
          <Switch>
            <Route exact path="/" component={Home}/>    
-           <Route exact path="/dashboard" component={() => <Dashboard authorized={true}/>} />
+           <Route exact path="/dashboard" component={loggedIn ? Dashboard : LoginPage} />
            <Route exact path="/loginpage" component={LoginPage} />
            <Route exact path="/signup" component={SignUpPage}/> 
          </Switch>

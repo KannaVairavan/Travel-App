@@ -3,6 +3,8 @@ import { useState }  from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import API from "../utils/API";
+import {Redirect} from 'react-router-dom';
+import { truncate } from 'fs';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,12 +24,10 @@ export default function SignUpPage(props) {
     lastName:"",
     email:"",
     password:""
-
-
   })
-
+  const [loggedIn, setLoggedIn] = useState(false);
   const [submitted, setSubmitted]=useState(false);
- 
+
 
   function loadTrip() {
    
@@ -57,7 +57,8 @@ export default function SignUpPage(props) {
       .then ((res)=>{
           console.log("res-token", res);
           if (res.status === 200) {
-            localStorage.setItem("usertoken", res)
+            localStorage.setItem("user", res.data.email)
+            setLoggedIn(true);
            } else {
             alert('Invalid account details, failed to register.');
            }
@@ -68,11 +69,14 @@ export default function SignUpPage(props) {
         email: "",
         password:""
       }))
-           
+  
         .catch(err => console.log(err));
     }
   };
 
+  if(loggedIn === true){
+    return <Redirect to="/dashboard"/>
+  } else{
   return (
     
     <form className={classes.root} noValidate autoComplete="off">
@@ -135,4 +139,5 @@ export default function SignUpPage(props) {
     </form>
  
   );
+}
 }

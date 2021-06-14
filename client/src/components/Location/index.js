@@ -11,7 +11,8 @@ import PerksCard from "../PerksCard";
 import Accordion from "../Accordion";
 import MapGl from "../MapGl";
 
-function LocationCard({ data }, props) {
+function LocationCard({ data, email }, props) {
+  console.log('ls email', email);
   const [results, setResults] = useState([]);
   const [userid, setUserID]=useState();
   useEffect(() => {
@@ -32,7 +33,7 @@ function LocationCard({ data }, props) {
     // console.log(index);
     event.preventDefault();
    
-    getuserid();
+    getuserid(email);
 
     const locationValues = results[index];
     // console.log("location data", locationValues);
@@ -48,10 +49,11 @@ function LocationCard({ data }, props) {
   };
   
   
-  const getuserid=()=>{
-    // replace useremail with email state
-    const useremail="kanna@kanna.com";
+  const getuserid=(email)=>{
     
+    
+    const useremail=email  //"kanna@kanna.com";
+    console.log("user email",email)
     if(useremail){
      
       API.login({
@@ -167,6 +169,7 @@ function LocationCard({ data }, props) {
                         >
                           Add to fav
                         </FormBtn>
+                       
                       </Col>
                     </Row>
                   </div>

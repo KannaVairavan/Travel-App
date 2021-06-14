@@ -12,7 +12,7 @@ function Dashboard (props) {
   <div>
 
     {/* <GoogleMap/> */}
-    {/* <TravelApp/> */}
+    <TravelApp/>
     <Wishlist/>
   </div>
 

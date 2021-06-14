@@ -18,13 +18,17 @@ const useStyles = makeStyles((theme) => ({
       },
     }));
     
-function Wishlist(){
+function Wishlist(props){
     // Setting our component's initial state
     const [wishList, setWishList]=useState([])
     const [locdata, setLocData] = useState([]);
     const [formObject, setFormObject]=useState({
         wish:""
     })
+    const [email, setEmail] = useState(
+        localStorage.getItem('useremail') || ''
+         );
+    
     const classes = useStyles();
     // Load all wishlist and store them with setwishlist
     useEffect(() => {
@@ -97,8 +101,8 @@ function Wishlist(){
     return(
         <Container>
             <h2>Favorite Locations</h2>
-            
-                    <LocationCard  data={locdata}/>
+                    {console.log('wl', email)}
+                    <LocationCard  data={locdata} email={email}/>
             
             
             {/* {wishList.length ? (

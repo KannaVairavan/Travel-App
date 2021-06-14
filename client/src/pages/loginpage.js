@@ -41,11 +41,12 @@ export default function LoginPage() {
     .then((res) => { 
       console.log("testing3")
       console.log("res login" , res);
-      let userCheck = {email: res.data.email};
-      let token = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'});
-      console.log(token);
+    
       if(res.status === 200){
-
+        let userCheck = {email: res.data.email};
+        let token = jwt.sign({data: userCheck}, "abcd", {expiresIn: '24h'});
+        console.log(token);
+        localStorage.setItem("user", token);
         setLoggedIn(true);
         alert("User is logged in")
       } else {

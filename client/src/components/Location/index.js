@@ -26,21 +26,65 @@ function LocationCard({ data }, props) {
     return number.toPrecision(3);
   };
 
+  // const handleFormSubmit = (event, index) => {
+  //   event.preventDefault();
+
+  //   const locationValues = results[index];
+  //   API.savewishlist({
+  //     location_id: locationValues.city_id,
+  //     location: locationValues.cityName,
+  //     coords_Lat: locationValues.coords.lat,
+  //     coords_Lon: locationValues.coords.lon,
+  //   })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
   const handleFormSubmit = (event, index) => {
+    // console.log(index);
     event.preventDefault();
+   
+    getuserid();
 
     const locationValues = results[index];
+    // console.log("location data", locationValues);
+    console.log(userid)
     API.savewishlist({
-      location_id: locationValues.city_id,
-      location: locationValues.cityName,
-      coords_Lat: locationValues.coords.lat,
-      coords_Lon: locationValues.coords.lon,
+      location_data:locationValues,
+      user:userid
     })
       .then((res) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
   };
+  
+  
+  const getuserid=()=>{
+    // replace useremail with email state
+    const useremail="kanna@kanna.com";
+    
+    if(useremail){
+     
+      API.login({
+        email: useremail
+             })
+      .then((res) => { 
+        
+        console.log("res login" , res.data);
+        setUserID(res.data._id)
+        console.log(res.data._id)
+      })
+      
+      .catch(err => console.log(err));
+  
+    }
+
+
+  }
+
 
   const enumerateCovid = (object) => {
     const targetURLs = [];

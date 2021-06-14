@@ -12,6 +12,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import NatureIcon from "@material-ui/icons/Nature";
 
 function PerksCard(props) {
+
+  const [favorite, setFavorite] = useState(0)
   const useStyles = makeStyles((theme) => ({
     expand: {
       transform: "rotate(0deg)",
@@ -35,20 +37,17 @@ function PerksCard(props) {
   });
 
   const handleExpandClick = (index, key) => {
-    // console.log("index", index, key);
-    // console.log("expanded", expanded);
-
     const currentValues = expanded[key];
     currentValues[index] = !currentValues[index];
     setExpanded({ ...expanded, [key]: currentValues });
   };
 
   return props.target.map((item, index) => (
-    <Container fluid>
+    <Container fluid key = {`container-${index}`}>
 
       <Card key={`${props.title}-index-${index}`}>
         {item.name}
-        <img src={item.icon} fontSize={"small"} key={`${props.title}-img-${index}`}></img>
+        <img src={item.icon} key={`${props.title}-img-${index}`}></img>
         <CardActions disableSpacing>
           <IconButton
             className={clsx(classes.expand, {
@@ -63,7 +62,7 @@ function PerksCard(props) {
         </CardActions>
 
         <Collapse in={expanded[`${props.title}`][index]} timeout="auto" unmountOnExit>
-          <CardContent>
+          <CardContent key = {`card-content-${index}`}>
             <ul key={`${props.title}-ul-${index}`}>
               <li key={`${props.title}-vicinity ${index}`}>{item.vicinity}</li>
               <li key={`${props.title}-rating ${index}`}>{item.rating}</li>

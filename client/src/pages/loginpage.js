@@ -32,10 +32,7 @@ export default function LoginPage() {
   const handleFormSubmit = (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
-    console.log(formObject.email);
-    console.log(formObject.password);
     if(formObject.email && formObject.password){
-    console.log("testing1")
     API.login({
       email: formObject.email,
       password: formObject.password
@@ -99,4 +96,5 @@ export default function LoginPage() {
     </form>
   );
 }
+
 }

@@ -31,7 +31,7 @@ export default function App() {
        <Router>
          <SearchAppBar />
          <Switch>
-           <Route exact path="/" component={Home}/>    
+           <Route exact path="/" component={Home} />    
            <Route exact path="/dashboard" component={Dashboard}  />
            <Route exact path="/loginpage" component={LoginPage} />
            <Route exact path="/signup" component={SignUpPage}/> 

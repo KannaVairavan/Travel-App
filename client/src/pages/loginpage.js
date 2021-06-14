@@ -47,7 +47,7 @@ export default function LoginPage() {
         let token = jwt.sign({data: userCheck}, "abcd", {expiresIn: '24h'});
         console.log(token);
         localStorage.setItem("user", token);
-        localStorage.setItem("useremail", res.data.email)
+        localStorage.setItem("userid", res.data._id);
         setLoggedIn(true);
        
         alert("User is logged in")

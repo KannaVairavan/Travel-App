@@ -22,12 +22,14 @@ function Wishlist(props){
     // Setting our component's initial state
     const [wishList, setWishList]=useState([])
     const [locdata, setLocData] = useState([]);
+    
     const [formObject, setFormObject]=useState({
         wish:""
     })
-    const [email, setEmail] = useState(
-        localStorage.getItem('useremail') || ''
-         );
+    const [userid, setUserID]=useState(
+        localStorage.getItem('userid') || ''
+      );
+    
     
     const classes = useStyles();
     // Load all wishlist and store them with setwishlist
@@ -46,11 +48,14 @@ function Wishlist(props){
 
     // Load all wishlist and set them to setWishLists
     function loadWishLists(){
+        // getuserid();
+       
         const resultsObject=[] ;
         API.getwishlists()
         .then((res) => {
-           
-            res.data.map((item, index) => {
+        //    '60c5f9858348f2450c1ae919'
+            console.log('user id', userid);
+            res.data.filter((data)=>data.user[0]===userid).map((item, index) => {
 
                     if (item.location_data.length >0){
                      resultsObject.push(item.location_data[0]);
@@ -68,6 +73,30 @@ function Wishlist(props){
         
         .catch(err => console.log(err));
     }
+
+    // const getuserid=()=>{
+    
+    
+    //     const useremail=email  //"kanna@kanna.com";
+    //     console.log("user email",email)
+    //     if(useremail){
+         
+    //       API.login({
+    //         email: useremail
+    //              })
+    //       .then((res) => { 
+            
+    //         console.log("res login" , res.data);
+    //         setUserID(res.data._id)
+    //         console.log(res.data._id)
+    //       })
+          
+    //       .catch(err => console.log(err));
+      
+    //     }
+    
+    
+    //   }
 
     // Delete wishlist by id then reload wishlists
     function deleteWishList(id){
@@ -101,8 +130,8 @@ function Wishlist(props){
     return(
         <Container>
             <h2>Favorite Locations</h2>
-                    {console.log('wl', email)}
-                    <LocationCard  data={locdata} email={email}/>
+                    
+                    <LocationCard  data={locdata} />
             
             
             {/* {wishList.length ? (

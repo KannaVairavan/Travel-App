@@ -11,10 +11,13 @@ import PerksCard from "../PerksCard";
 import Accordion from "../Accordion";
 import MapGl from "../MapGl";
 
-function LocationCard({ data, email }, props) {
-  console.log('ls email', email);
+function LocationCard({ data  }, props) {
+  // console.log('ls email', email);
   const [results, setResults] = useState([]);
-  const [userid, setUserID]=useState();
+  const [userid, setUserID]=useState(
+    localStorage.getItem('userid') || ''
+  );
+  
   useEffect(() => {
 
     if (data.length) {
@@ -33,7 +36,7 @@ function LocationCard({ data, email }, props) {
     // console.log(index);
     event.preventDefault();
    
-    getuserid(email);
+    // getuserid(email);
 
     const locationValues = results[index];
     // console.log("location data", locationValues);
@@ -49,29 +52,29 @@ function LocationCard({ data, email }, props) {
   };
   
   
-  const getuserid=(email)=>{
+  // const getuserid=()=>{
     
     
-    const useremail=email  //"kanna@kanna.com";
-    console.log("user email",email)
-    if(useremail){
+  //   const useremail=email  //"kanna@kanna.com";
+  //   console.log("user email",email)
+  //   if(useremail){
      
-      API.login({
-        email: useremail
-             })
-      .then((res) => { 
+  //     API.login({
+  //       email: useremail
+  //            })
+  //     .then((res) => { 
         
-        console.log("res login" , res.data);
-        setUserID(res.data._id)
-        console.log(res.data._id)
-      })
+  //       console.log("res login" , res.data);
+  //       setUserID(res.data._id)
+  //       console.log(res.data._id)
+  //     })
       
-      .catch(err => console.log(err));
+  //     .catch(err => console.log(err));
   
-    }
+  //   }
 
 
-  }
+  // }
 
 
   const enumerateCovid = (object) => {

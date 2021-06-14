@@ -11,9 +11,13 @@ import PerksCard from "../PerksCard";
 import Accordion from "../Accordion";
 import MapGl from "../MapGl";
 
-function LocationCard({ data }, props) {
+function LocationCard({ data  }, props) {
+  // console.log('ls email', email);
   const [results, setResults] = useState([]);
-  const [userid, setUserID]=useState();
+  const [userid, setUserID]=useState(
+    localStorage.getItem('userid') || ''
+  );
+  
   useEffect(() => {
 
     if (data.length) {
@@ -26,27 +30,13 @@ function LocationCard({ data }, props) {
     return number.toPrecision(3);
   };
 
-  // const handleFormSubmit = (event, index) => {
-  //   event.preventDefault();
-
-  //   const locationValues = results[index];
-  //   API.savewishlist({
-  //     location_id: locationValues.city_id,
-  //     location: locationValues.cityName,
-  //     coords_Lat: locationValues.coords.lat,
-  //     coords_Lon: locationValues.coords.lon,
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+  
 
   const handleFormSubmit = (event, index) => {
     // console.log(index);
     event.preventDefault();
    
-    getuserid();
+    // getuserid(email);
 
     const locationValues = results[index];
     // console.log("location data", locationValues);
@@ -62,28 +52,29 @@ function LocationCard({ data }, props) {
   };
   
   
-  const getuserid=()=>{
-    // replace useremail with email state
-    const useremail="kanna@kanna.com";
+  // const getuserid=()=>{
     
-    if(useremail){
+    
+  //   const useremail=email  //"kanna@kanna.com";
+  //   console.log("user email",email)
+  //   if(useremail){
      
-      API.login({
-        email: useremail
-             })
-      .then((res) => { 
+  //     API.login({
+  //       email: useremail
+  //            })
+  //     .then((res) => { 
         
-        console.log("res login" , res.data);
-        setUserID(res.data._id)
-        console.log(res.data._id)
-      })
+  //       console.log("res login" , res.data);
+  //       setUserID(res.data._id)
+  //       console.log(res.data._id)
+  //     })
       
-      .catch(err => console.log(err));
+  //     .catch(err => console.log(err));
   
-    }
+  //   }
 
 
-  }
+  // }
 
 
   const enumerateCovid = (object) => {
@@ -181,6 +172,7 @@ function LocationCard({ data }, props) {
                         >
                           Add to fav
                         </FormBtn>
+                       
                       </Col>
                     </Row>
                   </div>

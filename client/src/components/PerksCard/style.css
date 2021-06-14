@@ -1,4 +1,7 @@
-.MuiPaper-elevation1 {
+.row-upper {
 display:flex;
-justify-content: space-between
+justify-content: space-between;
+margin-left: 20px;
+align-items: center;
+/* justify-content: space-between !important; */
 }

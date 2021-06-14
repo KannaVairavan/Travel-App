@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Container from "../Container";
+import { Row, Col } from "../Grid";
+
 import Card from "@material-ui/core/Card";
 import Collapse from "@material-ui/core/Collapse";
 import CardActions from "@material-ui/core/CardActions";
@@ -8,12 +10,14 @@ import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import NatureIcon from "@material-ui/icons/Nature";
+import "./style.css"
+// import FavoriteIcon from "@material-ui/icons/Favorite";
+// import NatureIcon from "@material-ui/icons/Nature";
 
 function PerksCard(props) {
 
-  const [favorite, setFavorite] = useState(0)
+  // const [favorite, setFavorite] = useState(0)
+
   const useStyles = makeStyles((theme) => ({
     expand: {
       transform: "rotate(0deg)",
@@ -46,8 +50,12 @@ function PerksCard(props) {
     <Container fluid key = {`container-${index}`}>
 
       <Card key={`${props.title}-index-${index}`}>
+        <Row className = {'-upper'}>
         {item.name}
-        <img src={item.icon} key={`${props.title}-img-${index}`}></img>
+        <img src={item.icon} key={`${props.title}-img-${index}`} alt = {`City of ${item.cityName}`}></img>
+        </Row>
+
+        <Row className = {'-lower-btn'}>
         <CardActions disableSpacing>
           <IconButton
             className={clsx(classes.expand, {
@@ -61,14 +69,16 @@ function PerksCard(props) {
           </IconButton>
         </CardActions>
 
+
         <Collapse in={expanded[`${props.title}`][index]} timeout="auto" unmountOnExit>
           <CardContent key = {`card-content-${index}`}>
             <ul key={`${props.title}-ul-${index}`}>
-              <li key={`${props.title}-vicinity ${index}`}>{item.vicinity}</li>
-              <li key={`${props.title}-rating ${index}`}>{item.rating}</li>
+              <li>{item.vicinity}</li>
+              <li>{item.rating}</li>
             </ul>
           </CardContent>
         </Collapse>
+        </Row>
       </Card>
     </Container>
   ));

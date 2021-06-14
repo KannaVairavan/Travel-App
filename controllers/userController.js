@@ -31,9 +31,8 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       },
       login: function(req, res){
-        console.log("userController ")
         db.User
-          .findOne({email: req.body.params})
+          .findOne({email: req.body.email})
           .then(dbModel => {
             if(!dbModel){
               res.status(500).json("No user found");
@@ -53,9 +52,10 @@ module.exports = {
           .create(req.body)
           .then(dbModel => {
             if(dbModel){
-              let userCheck = {email: dbModel.email};
-              let cookie = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'});
-              res.json(cookie)
+              // let userCheck = {email: dbModel.email};
+              // let cookie = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'});
+              // res.json(cookie)
+              console.log(dbModel);
             }
           })
           .catch(err => res.status(422).json(err));

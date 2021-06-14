@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import API from "../utils/API";
 import {Redirect} from 'react-router-dom';
-import { truncate } from 'fs';
 
 
 const useStyles = makeStyles((theme) => ({

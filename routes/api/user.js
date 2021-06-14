@@ -20,6 +20,7 @@ router
 
 router
   .route("/login")
+  .post(userController.login)
   .get(userController.login)
 
 module.exports = router;

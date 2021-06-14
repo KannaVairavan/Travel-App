@@ -26,21 +26,7 @@ function LocationCard({ data }, props) {
     return number.toPrecision(3);
   };
 
-  // const handleFormSubmit = (event, index) => {
-  //   event.preventDefault();
-
-  //   const locationValues = results[index];
-  //   API.savewishlist({
-  //     location_id: locationValues.city_id,
-  //     location: locationValues.cityName,
-  //     coords_Lat: locationValues.coords.lat,
-  //     coords_Lon: locationValues.coords.lon,
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+  
 
   const handleFormSubmit = (event, index) => {
     // console.log(index);

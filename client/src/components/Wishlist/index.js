@@ -100,6 +100,30 @@ function Wishlist(){
             
                     <LocationCard  data={locdata}/>
             
+            
+            {/* {wishList.length ? (
+                <Grid >
+                    {console.log("locdata",results)}
+                    
+                    {wishList.map(W_list =>{
+                        return(
+                           
+                            <div key={W_list._id}>
+                                 
+                               
+                                <LocationCard data={W_list.location_data}/> 
+                                
+                            </div>
+                           
+                        );
+
+                    })}
+              
+                </Grid>
+            ): (
+                <h3>No Results to Display</h3>
+            )}            */}
+
             {/* <MapGl results={locdata} viewport={viewport} setViewport={setViewport}/> */}
             
         </Container>

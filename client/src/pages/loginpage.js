@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import API from "../utils/API";
 import {Redirect} from 'react-router-dom';
+const jwt = require('jsonwebtoken');
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,10 +33,7 @@ export default function LoginPage() {
   const handleFormSubmit = (e) => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
-    console.log(formObject.email);
-    console.log(formObject.password);
     if(formObject.email && formObject.password){
-    console.log("testing1")
     API.login({
       email: formObject.email,
       password: formObject.password
@@ -43,8 +41,11 @@ export default function LoginPage() {
     .then((res) => { 
       console.log("testing3")
       console.log("res login" , res);
+      let userCheck = {email: res.data.email};
+      let token = jwt.sign({data: userCheck}, "abcd", {maxAge:'24h'});
+      console.log(token);
       if(res.status === 200){
-        localStorage.setItem("user", res.data.email)
+
         setLoggedIn(true);
         alert("User is logged in")
       } else {
@@ -60,9 +61,11 @@ export default function LoginPage() {
   }
   }
 
-  if(loggedIn === true){
-    return <Redirect to="/dashboard"/>
-  } else{
+  // if(loggedIn === true){
+  //   return <Redirect to="/dashboard"/>
+  // } 
+  
+  // else{
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>
@@ -99,5 +102,5 @@ export default function LoginPage() {
     </form>
   );
 }
+// }
 
-}

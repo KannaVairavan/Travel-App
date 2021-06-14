@@ -99,8 +99,5 @@ export default function LoginPage() {
     </form>
   );
 }
-<<<<<<< HEAD
 
 }
-=======
->>>>>>> 767f72fbb084f0fa8a58ab91a408e0befce6e13b

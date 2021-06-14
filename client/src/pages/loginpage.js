@@ -34,7 +34,6 @@ export default function LoginPage() {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     e.preventDefault();
     if(formObject.email && formObject.password){
-    console.log("testing1")
     API.login({
       email: formObject.email,
       password: formObject.password
@@ -104,3 +103,4 @@ export default function LoginPage() {
   );
 }
 // }
+

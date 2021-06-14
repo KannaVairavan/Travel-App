@@ -13,7 +13,7 @@ import MapGl from "../MapGl";
 
 function LocationCard({ data }, props) {
   const [results, setResults] = useState([]);
-
+  const [userid, setUserID]=useState();
   useEffect(() => {
 
     if (data.length) {

@@ -146,20 +146,20 @@ function LocationCard({ data }, props) {
                 <Row className={"-accordion"}>
                   <Accordion
                     title={"Parks"}
-                    id={"Parks"}
+                    ids={"parks"}
                   >
                     <PerksCard
                       target={locations.park}
                       title={"park"}
                     ></PerksCard>
                   </Accordion>
-                  <Accordion title={"Restaurants"} id={"Restaurants"}>
+                  <Accordion title={"Restaurants"} ids={"restaurants"}>
                     <PerksCard
                       target={locations.restaurant}
                       title={"restaurant"}
                     ></PerksCard>
                   </Accordion>
-                  <Accordion title={"RV Parks"} id={"RV-Parks"}>
+                  <Accordion title={"RV Parks"} ids={"rv-parks"}>
                     <PerksCard
                       target={locations.rv_park}
                       title={"rv_park"}
@@ -167,7 +167,7 @@ function LocationCard({ data }, props) {
                   </Accordion>
                   <Accordion
                     title={"Tourist Attractions"}
-                    id={"Tourist-Attractions"}
+                    ids={"tourist-attractions"}
                   >
                     <PerksCard
                       target={locations.tourist_attraction}

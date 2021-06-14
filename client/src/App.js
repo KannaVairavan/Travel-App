@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect }  from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import SearchAppBar from "./components/Nav";
-import GetGoat from './pages/roadGoatSearch'
 import Home from "./pages/index";
 import Dashboard from "./pages/dashboard";
 import LoginPage from "./pages/loginpage";

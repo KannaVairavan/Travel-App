@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function App() {
-
-
+  let saved = localStorage.getItem("user");
+  const [loggedIn, setLoggedIn] = useState(false);
  const classes = useStyles();
  return (
      <div className = {`${classes.container} ${classes.root}`}>
@@ -33,7 +33,7 @@ export default function App() {
          <Switch>
            <Route exact path="/" component={Home}/>    
            <Route exact path="/dashboard" component={Dashboard} />
-           <Route exact path="/loginpage" component={LoginPage} />
+           <Route exact path="/loginpage"  component={LoginPage} />
            <Route exact path="/signup" component={SignUpPage}/> 
          </Switch>
        </Router>

@@ -25,12 +25,10 @@ export default {
   },
 
   login:function(userData){
-    console.log(userData)
     return axios.post("/api/user/login", userData);
   },
 
   signup: function(userData){
-    console.log(userData)
     return axios.post("/api/user/signup", userData);
   },
 

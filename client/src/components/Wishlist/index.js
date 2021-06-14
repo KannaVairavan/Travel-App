@@ -98,8 +98,6 @@ function Wishlist(){
         <Container>
             <h2>Favorite Locations</h2>
             
-           
-            
                     <LocationCard  data={locdata}/>
             
             

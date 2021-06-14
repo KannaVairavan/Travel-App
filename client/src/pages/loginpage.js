@@ -47,7 +47,12 @@ export default function LoginPage() {
         let token = jwt.sign({data: userCheck}, "abcd", {expiresIn: '24h'});
         console.log(token);
         localStorage.setItem("user", token);
+
         localStorage.setItem("userid", res.data._id);
+
+        localStorage.setItem("userEmail", res.data.email);
+        localStorage.setItem("loggedIn", true);
+
         setLoggedIn(true);
        
         alert("User is logged in")
@@ -64,11 +69,11 @@ export default function LoginPage() {
   }
   }
 
-  // if(loggedIn === true){
-  //   return <Redirect to="/dashboard"/>
-  // } 
+  if(loggedIn === true){
+    return <Redirect to="/dashboard"/>
+  } 
   
-  // else{
+  else{
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <div>
@@ -105,5 +110,6 @@ export default function LoginPage() {
     </form>
   );
 }
-// }
+}
+
 

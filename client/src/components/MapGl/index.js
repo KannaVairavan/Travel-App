@@ -27,7 +27,7 @@ function MapGl(props) {
       {...viewport}
       onViewportChange={nextViewport => setViewport(nextViewport)}>
       (
-        {/* <Marker
+        <Marker
         
         longitude={props.coords.lon}
         latitude={props.coords.lat}>
@@ -41,8 +41,8 @@ function MapGl(props) {
         >
         <path d={ICON} />
       </svg>
-        </Marker> */}
-      
+        </Marker>
+      )
       
       {/* )} */}
     </ReactMapGL>

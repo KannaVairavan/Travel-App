@@ -48,6 +48,7 @@ export default function LoginPage() {
         console.log(token);
         localStorage.setItem("user", token);
         localStorage.setItem("userEmail", res.data.email);
+        localStorage.setItem("loggedIn", true);
         setLoggedIn(true);
         alert("User is logged in")
       } else {

@@ -179,8 +179,8 @@ function LocationCard({ data  }, props) {
                       </Row>
 
                       <Col size={"md-6"}>
-                        {window.location.href == "/home" ||
-                        window.location.href == "/" ? (
+                        {window.location.href == "http://localhost:3000/home" ||
+                        window.location.href == "http://localhost:3000/" ? (
                           <FormBtn
                             purpose={"add"}
                             onClick={(event) => handleFormSubmit(event, index)}

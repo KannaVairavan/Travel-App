@@ -11,14 +11,12 @@ import PerksCard from "../PerksCard";
 import Accordion from "../Accordion";
 import MapGl from "../MapGl";
 
-function LocationCard({ data  }, props) {
+function LocationCard({ data }, props) {
   // console.log('ls email', email);
   const [results, setResults] = useState([]);
 
-  const [userid, setUserID]=useState(
-    localStorage.getItem('userid') || ''
-  );
-  
+  const [userid, setUserID] = useState(localStorage.getItem("userid") || "");
+
   useEffect(() => {
     if (data.length) {
       setResults(data);
@@ -30,14 +28,11 @@ function LocationCard({ data  }, props) {
     return number.toPrecision(3);
   };
 
-  
-
   const handleFormSubmit = (event, index) => {
     // console.log(index);
     event.preventDefault();
-   
-    // getuserid(email);
 
+    // getuserid(email);
 
     const locationValues = results[index];
     // console.log("location data", locationValues);
@@ -51,7 +46,6 @@ function LocationCard({ data  }, props) {
       })
       .catch((err) => console.log(err));
   };
-
 
   function deleteWishList(id) {
     API.deletewishlist(id)
@@ -88,7 +82,9 @@ function LocationCard({ data  }, props) {
   return (
     <Container className={"-results-card-body "}>
       {window.location.href == "http://localhost:3000/home" ||
-      window.location.href == "http://localhost:3000/" ? (
+      window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/" ||
+      window.location.href == "http://localhost:3000/" ||
+      window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/" ? (
         <Row className={"-title-row"}>
           {!results.length ? (
             <h1>Planning a trip?</h1>
@@ -180,7 +176,10 @@ function LocationCard({ data  }, props) {
 
                       <Col size={"md-6"}>
                         {window.location.href == "http://localhost:3000/home" ||
-                        window.location.href == "http://localhost:3000/" ? (
+                        window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/" ||
+                        window.location.href == "http://localhost:3000/" ||
+                        window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/" 
+                        ? (
                           <FormBtn
                             purpose={"add"}
                             onClick={(event) => handleFormSubmit(event, index)}
@@ -196,7 +195,6 @@ function LocationCard({ data  }, props) {
                           </FormBtn>
                         )}
                       </Col>
-                      
                     </Row>
                   </div>
                 </div>

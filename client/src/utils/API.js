@@ -31,6 +31,9 @@ export default {
   signup: function(userData){
     return axios.post("/api/user/signup", userData);
   },
+  logout: function(){
+    return axios.post("/api/user/logout");
+  },
 
   nearbySearch:function(Lat, Long){
     return axios.get('/api/nearbySearch', {

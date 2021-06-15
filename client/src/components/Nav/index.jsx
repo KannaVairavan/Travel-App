@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
-
+import {Redirect} from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -77,6 +77,13 @@ const SearchAppBar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [state, setState] = React.useState(false);
+  const deleteStorage = () => {
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('user');
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('userId');
+    
+  };
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -122,7 +129,7 @@ const SearchAppBar = (props) => {
               <Link to="/dashboard">Dashboard</Link>
               </MenuItem>
               <MenuItem>
-              <Link to="/logout">Logout</Link>
+              <Link onClick={deleteStorage} to="/logout">Logout</Link>
               </MenuItem>
             </Menu>
           </Toolbar>

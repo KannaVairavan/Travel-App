@@ -7,37 +7,41 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import LocationCard from "../Location";
-import MapGl from "../MapGl";
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    margin: theme.spacing(1),
-  },
-}));
+    
+function Wishlist(props){
+    // Setting our component's initial state
+    const [locdata, setLocData] = useState([]);
+    
+  
+    const [userid, setUserID]=useState(
+        localStorage.getItem('userid') || ''
+      );
+    
+    
+    const classes = useStyles();
+    // Load all wishlist and store them with setwishlist
+    useEffect(() => {
+        loadWishLists();
+      
+    }, [])
 
-function Wishlist() {
-  // Setting our component's initial state
-  const [wishList, setWishList] = useState([]);
-  const [locdata, setLocData] = useState([]);
-  const [formObject, setFormObject] = useState({
-    wish: "",
-  });
   const classes = useStyles();
   // Load all wishlist and store them with setwishlist
   useEffect(() => {
     loadWishLists();
   }, []);
 
-  const [viewport, setViewport] = useState({
-    width: 500,
-    height: 500,
-    latitude: 38.0,
-    longitude: -97.0,
-    zoom: 3,
-  });
+
+    // Load all wishlist and set them to setWishLists
+    function loadWishLists(){
+        // getuserid();
+       
+        const resultsObject=[] ;
+        API.getwishlists()
+        .then((res) => {
+        //    '60c5f9858348f2450c1ae919'
+            console.log('user id', userid);
+            res.data.filter((data)=>data.user[0]===userid).map((item, index) => {
 
   // Load all wishlist and set them to setWishLists
   function loadWishLists() {
@@ -56,20 +60,40 @@ function Wishlist() {
         console.log("obj", resultsObject);
       })
 
-      .catch((err) => console.log(err));
-  }
+    // Delete wishlist by id then reload wishlists
+    function deleteWishList(id){
+        API.deletewishlist(id)
+            .then(res =>loadWishLists())
+            .catch(err => console.log(err))
+    }
+    // Update wishlist by id
+    function handleInputChange(event) {
+        const { name, value } = event.target;
+        setFormObject({...formObject, [name]: value})
+      };
+    
+    // When the form is submitted, use the API.savewishlist method to save the wishlist data
+    // Then reload wishlist from the database
+    function handleFormSubmit(event){
+        event.preventDefault();
+        if (formObject.wish ) {
+            API.savewishlist({
+                wish:formObject.wish
+            })
+              .then(()=>setFormObject({
+                  wish:""
+              }))
+              .then(()=>loadWishLists())
+              .catch(err => console.log(err));
+        }
 
-  // Delete wishlist by id then reload wishlists
-  function deleteWishList(id) {
-    API.deletewishlist(id)
-      .then((res) => loadWishLists())
-      .catch((err) => console.log(err));
-  }
-  // Update wishlist by id
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    setFormObject({ ...formObject, [name]: value });
-  }
+    }
+    
+    return(
+        <Container>
+                    
+                    <LocationCard  data={locdata} />
+            
 
   // When the form is submitted, use the API.savewishlist method to save the wishlist data
   // Then reload wishlist from the database

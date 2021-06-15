@@ -11,9 +11,14 @@ import PerksCard from "../PerksCard";
 import Accordion from "../Accordion";
 import MapGl from "../MapGl";
 
-function LocationCard({ data }, props) {
+function LocationCard({ data  }, props) {
+  // console.log('ls email', email);
   const [results, setResults] = useState([]);
-  const [userid, setUserID] = useState();
+
+  const [userid, setUserID]=useState(
+    localStorage.getItem('userid') || ''
+  );
+  
   useEffect(() => {
     if (data.length) {
       setResults(data);
@@ -25,10 +30,15 @@ function LocationCard({ data }, props) {
     return number.toPrecision(3);
   };
 
+  
+
   const handleFormSubmit = (event, index) => {
     // console.log(index);
     event.preventDefault();
-    getuserid();
+   
+    // getuserid(email);
+
+
     const locationValues = results[index];
     // console.log("location data", locationValues);
     console.log(userid);
@@ -41,6 +51,7 @@ function LocationCard({ data }, props) {
       })
       .catch((err) => console.log(err));
   };
+
 
   function deleteWishList(id) {
     API.deletewishlist(id)
@@ -166,6 +177,7 @@ function LocationCard({ data }, props) {
                           />
                         </a>
                       </Row>
+
                       <Col size={"md-6"}>
                         {window.location.href == "/home" ||
                         window.location.href == "/" ? (
@@ -184,6 +196,7 @@ function LocationCard({ data }, props) {
                           </FormBtn>
                         )}
                       </Col>
+                      
                     </Row>
                   </div>
                 </div>

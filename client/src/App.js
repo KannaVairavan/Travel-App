@@ -21,19 +21,26 @@ const useStyles = makeStyles((theme) => ({
 
 
 
+
 export default function App() {
-  let saved = localStorage.getItem("user");
-  const [loggedIn, setLoggedIn] = useState(false);
- const classes = useStyles();
+  // let saved = localStorage.getItem("user");
+  // let loggedIn = localStorage.getItem("loggedIn");
+  // const [logged, setLogged] = useState(false);
+  // if(loggedIn === 'true'){
+  //   setLogged(true);
+  // }
+  const classes = useStyles();
+
  return (
      <div className = {`${classes.container} ${classes.root}`}>
        <Router>
-         <SearchAppBar />
+         <SearchAppBar  />
          <Switch>
-           <Route exact path="/" component={Home}/>    
-           <Route exact path="/dashboard" component={Dashboard} />
+           <Route exact path="/"  component={Home}/>    
+           <Route exact path="/dashboard"  component={Dashboard} />
            <Route exact path="/loginpage"  component={LoginPage} />
            <Route exact path="/signup" component={SignUpPage}/> 
+           <Route exact path="/logout"/>
          </Switch>
        </Router>
        <CssBaseline />

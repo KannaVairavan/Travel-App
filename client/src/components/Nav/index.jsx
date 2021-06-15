@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
-
+import {Redirect} from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -72,16 +72,72 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchAppBar = () => {
+const SearchAppBar = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [state, setState] = React.useState(false);
+  const deleteStorage = () => {
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('user');
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('userId');
+    
+  };
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
-
+  if(localStorage.getItem("loggedIn") === 'true'){
+    return (
+      <div className={classes.root}>
+        <AppBar color="transparent" position="static" >
+          <Toolbar>
+          
+          <Typography className={classes.title} variant="h6" noWrap>
+              TravelApp
+            </Typography>
+            
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              onClick={handleMenu}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-bar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left"
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left"
+              }}
+              open={open}
+              onClose={() => setAnchorEl(null)}
+            >
+              <MenuItem>
+              <Link to="/">Home</Link>
+              </MenuItem>
+              <MenuItem>
+              <Link to="/dashboard">Dashboard</Link>
+              </MenuItem>
+              <MenuItem>
+              <Link onClick={deleteStorage} to="/logout">Logout</Link>
+              </MenuItem>
+            </Menu>
+          </Toolbar>
+        </AppBar>
+      </div>
+    ); 
+  }
+  else {
   return (
     <div className={classes.root}>
       <AppBar color="transparent" position="static" >
@@ -132,6 +188,7 @@ const SearchAppBar = () => {
       </AppBar>
     </div>
   );
+  }
 };
 
 export default SearchAppBar;

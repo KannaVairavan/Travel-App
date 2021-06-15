@@ -7,14 +7,12 @@ import TravelApp from "../pages/index";
 
 function Dashboard (props) {
 
-
   return (
   <div>
 
     {/* <GoogleMap/> */}
-    {/* <TravelApp/> */}
-
-    <Wishlist/>
+    <TravelApp />
+    <Wishlist />
   </div>
 
 )

@@ -21,6 +21,7 @@ function Wishlist(props) {
   function loadWishLists() {
     // getuserid();
     const resultsObject = [];
+    const additem=[];
     API.getwishlists()
       .then((res) => {
         console.log("user id", userid);
@@ -28,7 +29,11 @@ function Wishlist(props) {
           .filter((data) => data.user[0] === userid)
           .map((item, index) => {
             if (item.location_data.length > 0) {
+              const wl_id = item._id;  
+              console.log("wl_id", wl_id)
+              item.location_data[0]['wl_id']=item._id;
               resultsObject.push(item.location_data[0]);
+             
             }
           });
         console.log("list", res.data);

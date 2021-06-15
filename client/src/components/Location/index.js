@@ -54,6 +54,7 @@ function LocationCard({ data  }, props) {
 
 
   function deleteWishList(id) {
+    console.log(id)
     API.deletewishlist(id)
       // .then((res) => loadWishLists())
       .catch((err) => console.log(err));
@@ -190,7 +191,7 @@ function LocationCard({ data  }, props) {
                         ) : (
                           <FormBtn
                             purpose={"delete"}
-                            onClick={(event) => deleteWishList(event, index)}
+                            onClick={() => deleteWishList(index)}
                           >
                             Delete
                           </FormBtn>

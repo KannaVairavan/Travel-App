@@ -42,6 +42,10 @@ function LocationCard({ data  }, props) {
     const locationValues = results[index];
     // console.log("location data", locationValues);
     console.log(userid);
+    if (!userid){
+      alert("Login to save favorites!")
+    } else 
+    {
     API.savewishlist({
       location_data: locationValues,
       user: userid,
@@ -50,6 +54,7 @@ function LocationCard({ data  }, props) {
         console.log(res);
       })
       .catch((err) => console.log(err));
+    }  
   };
 
 
@@ -59,23 +64,7 @@ function LocationCard({ data  }, props) {
        .then((res) =>window.location.reload())
        .catch((err) => console.log(err));
   }
-  // const getuserid = () => {
-  //   // replace useremail with email state
-  //   const useremail = "kanna@kanna.com";
-
-  //   if (useremail) {
-  //     API.login({
-  //       email: useremail,
-  //     })
-  //       .then((res) => {
-  //         console.log("res login", res.data);
-  //         setUserID(res.data._id);
-  //         console.log(res.data._id);
-  //       })
-
-  //       .catch((err) => console.log(err));
-  //   }
-  // };
+  
 
   const enumerateCovid = (object) => {
     const targetURLs = [];

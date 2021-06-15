@@ -1,9 +1,15 @@
 .row-results-main-body {
   margin-top: 20px;
+  display:flex;
+  /* justify-content: flex-start; */
 }
 
-.container-fluid {
+.container {
   min-width: fit-content !important;
+  max-width: fit-content !important;
+  margin:1px;
+  margin-bottom:10px;
+  /* border: 2px solid orange ; */
 }
 
 .container-results-card-body {
@@ -14,8 +20,11 @@
 }
 
 .row-results {
+  display:flex;
+  flex-wrap:wrap;
   min-width:fit-content;
-  justify-content: space-evenly;
+  margin:20px;
+  /* justify-content: space-evenly; */
 }
 
 .row-results-body {

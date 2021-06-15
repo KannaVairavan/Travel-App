@@ -56,26 +56,26 @@ function LocationCard({ data  }, props) {
   function deleteWishList(id) {
     console.log(id)
     API.deletewishlist(id)
-      // .then((res) => loadWishLists())
-      .catch((err) => console.log(err));
+       .then((res) =>window.location.reload())
+       .catch((err) => console.log(err));
   }
-  const getuserid = () => {
-    // replace useremail with email state
-    const useremail = "kanna@kanna.com";
+  // const getuserid = () => {
+  //   // replace useremail with email state
+  //   const useremail = "kanna@kanna.com";
 
-    if (useremail) {
-      API.login({
-        email: useremail,
-      })
-        .then((res) => {
-          console.log("res login", res.data);
-          setUserID(res.data._id);
-          console.log(res.data._id);
-        })
+  //   if (useremail) {
+  //     API.login({
+  //       email: useremail,
+  //     })
+  //       .then((res) => {
+  //         console.log("res login", res.data);
+  //         setUserID(res.data._id);
+  //         console.log(res.data._id);
+  //       })
 
-        .catch((err) => console.log(err));
-    }
-  };
+  //       .catch((err) => console.log(err));
+  //   }
+  // };
 
   const enumerateCovid = (object) => {
     const targetURLs = [];
@@ -191,7 +191,7 @@ function LocationCard({ data  }, props) {
                         ) : (
                           <FormBtn
                             purpose={"delete"}
-                            onClick={() => deleteWishList(index)}
+                            onClick={() => deleteWishList(locations.wl_id)}
                           >
                             Delete
                           </FormBtn>

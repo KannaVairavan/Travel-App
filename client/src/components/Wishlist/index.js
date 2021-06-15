@@ -21,7 +21,7 @@ function Wishlist(props) {
   function loadWishLists() {
     // getuserid();
     const resultsObject = [];
-    const additem=[];
+    
     API.getwishlists()
       .then((res) => {
         console.log("user id", userid);

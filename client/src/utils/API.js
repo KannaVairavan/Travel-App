@@ -12,6 +12,7 @@ export default {
   
   // Deletes the wishlist with the given id
   deletewishlist: function(id) {
+    console.log('cont wlid',id);
     return axios.delete("/api/wishlist/" + id);
   },
 

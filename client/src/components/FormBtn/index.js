@@ -15,7 +15,13 @@ export function FormBtn(props) {
       <button
         {...props}
         style={{ float: "right", marginBottom: 10 }}
-        className={`btn btn-success ${props.stylename}`}
+        className={ 
+          props.purpose =='add' 
+          ? 
+          `btn btn-success ${props.stylename} `
+          : 
+          `btn btn-danger ${props.stylename}`
+        }
       >
         {props.children}
       </button>

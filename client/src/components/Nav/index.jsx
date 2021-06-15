@@ -81,7 +81,8 @@ const SearchAppBar = (props) => {
     localStorage.removeItem('userEmail');
     localStorage.removeItem('user');
     localStorage.removeItem('loggedIn');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('userid');
+
   };
 
   const handleMenu = event => {

@@ -82,7 +82,7 @@ function LocationCard({ data }, props) {
   return (
     <Container className={"-results-card-body "}>
       {window.location.href == "http://localhost:3000/home" ||
-      window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/" ||
+      window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/home" ||
       window.location.href == "http://localhost:3000/" ||
       window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/" ? (
         <Row className={"-title-row"}>
@@ -176,7 +176,7 @@ function LocationCard({ data }, props) {
 
                       <Col size={"md-6"}>
                         {window.location.href == "http://localhost:3000/home" ||
-                        window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/" ||
+                        window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/home" ||
                         window.location.href == "http://localhost:3000/" ||
                         window.location.href == "https://enigmatic-taiga-76938.herokuapp.com/" 
                         ? (

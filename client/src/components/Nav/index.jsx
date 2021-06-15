@@ -82,7 +82,7 @@ const SearchAppBar = (props) => {
     localStorage.removeItem('user');
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('userid');
-    
+
   };
 
   const handleMenu = event => {
@@ -93,7 +93,6 @@ const SearchAppBar = (props) => {
       <div className={classes.root}>
         <AppBar color="transparent" position="static" >
           <Toolbar>
-          
           <Typography className={classes.title} variant="h6" noWrap>
               TravelApp
             </Typography>
@@ -129,7 +128,7 @@ const SearchAppBar = (props) => {
               <Link to="/dashboard">Dashboard</Link>
               </MenuItem>
               <MenuItem>
-              <Link onClick={deleteStorage} to="/logout">Logout</Link>
+              <Link onClick={deleteStorage} to="/">Logout</Link>
               </MenuItem>
             </Menu>
           </Toolbar>
@@ -137,8 +136,8 @@ const SearchAppBar = (props) => {
       </div>
     ); 
   }
-  else {
-  return (
+  else  {
+    return (
     <div className={classes.root}>
       <AppBar color="transparent" position="static" >
         <Toolbar>

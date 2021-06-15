@@ -6,7 +6,8 @@ import TravelApp from "../pages/index";
 
 
 function Dashboard (props) {
-
+ let loggedIn = localStorage.getItem("loggedIn");
+  if(loggedIn === 'true'){
   return (
   <div>
 
@@ -16,6 +17,12 @@ function Dashboard (props) {
   </div>
 
 )
+}
+else {
+  return(
+    <Redirect to="/loginpage"/>
+  )
+}
 }
 
 

@@ -13,78 +13,57 @@ import MapGl from "../MapGl";
 
 function LocationCard({ data }, props) {
   const [results, setResults] = useState([]);
-  const [userid, setUserID]=useState();
+  const [userid, setUserID] = useState();
   useEffect(() => {
-
     if (data.length) {
       setResults(data);
     }
-    console.log("no data");
+    console.log("no data", window.location.href);
   }, [data]);
 
   const preciseRating = (number) => {
     return number.toPrecision(3);
   };
 
-  // const handleFormSubmit = (event, index) => {
-  //   event.preventDefault();
-
-  //   const locationValues = results[index];
-  //   API.savewishlist({
-  //     location_id: locationValues.city_id,
-  //     location: locationValues.cityName,
-  //     coords_Lat: locationValues.coords.lat,
-  //     coords_Lon: locationValues.coords.lon,
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   const handleFormSubmit = (event, index) => {
     // console.log(index);
     event.preventDefault();
-   
     getuserid();
-
     const locationValues = results[index];
     // console.log("location data", locationValues);
-    console.log(userid)
+    console.log(userid);
     API.savewishlist({
-      location_data:locationValues,
-      user:userid
+      location_data: locationValues,
+      user: userid,
     })
       .then((res) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
   };
-  
-  
-  const getuserid=()=>{
-    // replace useremail with email state
-    const useremail="kanna@kanna.com";
-    
-    if(useremail){
-     
-      API.login({
-        email: useremail
-             })
-      .then((res) => { 
-        
-        console.log("res login" , res.data);
-        setUserID(res.data._id)
-        console.log(res.data._id)
-      })
-      
-      .catch(err => console.log(err));
-  
-    }
 
-
+  function deleteWishList(id) {
+    API.deletewishlist(id)
+      // .then((res) => loadWishLists())
+      .catch((err) => console.log(err));
   }
+  const getuserid = () => {
+    // replace useremail with email state
+    const useremail = "kanna@kanna.com";
 
+    if (useremail) {
+      API.login({
+        email: useremail,
+      })
+        .then((res) => {
+          console.log("res login", res.data);
+          setUserID(res.data._id);
+          console.log(res.data._id);
+        })
+
+        .catch((err) => console.log(err));
+    }
+  };
 
   const enumerateCovid = (object) => {
     const targetURLs = [];
@@ -97,21 +76,36 @@ function LocationCard({ data }, props) {
 
   return (
     <Container className={"-results-card-body "}>
-      <Row className={"-title-row"}>
-        {!results.length ? ( <h1>Planning a trip?</h1> ) : ( <h1> We found your new destination! <br /> <br /> </h1> )}
-      </Row>
+      {window.location.href == "http://localhost:3000/home" ||
+      window.location.href == "http://localhost:3000/" ? (
+        <Row className={"-title-row"}>
+          {!results.length ? (
+            <h1>Planning a trip?</h1>
+          ) : (
+            <h1>
+              {" "}
+              We found your new destination! <br /> <br />{" "}
+            </h1>
+          )}
+        </Row>
+      ) : (
+        <Row className={"-title-row"}>
+          {!results.length ? (
+            <h1>Welcome Back</h1>
+          ) : (
+            <h1>
+              {" "}
+              Your wishlist <br /> <br />{" "}
+            </h1>
+          )}
+        </Row>
+      )}
       <Row className={"-results"}>
         {results.map((locations, index) => (
-          <Container fluid key = {`card-holder-${index}`}>
-            <Row className={"-results-body"} >
-              <Col
-                size={"md-6 location-primary-results"}
-                
-              >
-                <div
-                  className="card"
-                  style={{ width: "20rem", margin: "10px" }}
-                >
+          <Container className={""} key={`card-holder-${index}`}>
+            <Row className={"-results-body"}>
+              <Col size={"md-1 location-primary-results"}>
+                <div className="card" style={{ width: "20rem", margin: "0px" }}>
                   <img
                     src={
                       locations.image_info.img_src == null
@@ -126,11 +120,8 @@ function LocationCard({ data }, props) {
                       <Col size={"md-8"}>
                         <h5 className="card-title">{locations.cityName}</h5>
                       </Col>
-                      <Col size={"md-4 rating"} >
-                        <h5 className="card-text city-rating-title">
-                          
-                          Rating
-                        </h5>
+                      <Col size={"md-4 rating"}>
+                        <h5 className="card-text city-rating-title">Rating</h5>
                         <h5 className="card-text city-rating">
                           {preciseRating(
                             locations.details.data.attributes.average_rating
@@ -142,7 +133,7 @@ function LocationCard({ data }, props) {
 
                   <div className="card-body">
                     <Row className="-card-header-row">
-                      <Row className={"md-6 card-links"} >
+                      <Row className={"md-6 card-links"}>
                         <a
                           href={
                             locations.details.data.attributes.getyourguide_url
@@ -175,35 +166,43 @@ function LocationCard({ data }, props) {
                           />
                         </a>
                       </Row>
-                      <Col size={"md-6"} >
-                        <FormBtn
-                          onClick={(event) => handleFormSubmit(event, index)}
-                        >
-                          Add to fav
-                        </FormBtn>
+                      <Col size={"md-6"}>
+                        {window.location.href == "/home" ||
+                        window.location.href == "/" ? (
+                          <FormBtn
+                            purpose={"add"}
+                            onClick={(event) => handleFormSubmit(event, index)}
+                          >
+                            Add to fav
+                          </FormBtn>
+                        ) : (
+                          <FormBtn
+                            purpose={"delete"}
+                            onClick={(event) => deleteWishList(event, index)}
+                          >
+                            Delete
+                          </FormBtn>
+                        )}
                       </Col>
                     </Row>
                   </div>
                 </div>
               </Col>
-              <Col size={"md-6 location-perks"} >
+              <Col size={"md-2 location-perks"}>
                 <Row className={"-accordion"}>
-                  <Accordion
-                    title={"Parks"}
-                    ids={"parks"}
-                  >
+                  <Accordion title={"Parks"} ids={`parks-${index}`}>
                     <PerksCard
                       target={locations.park}
                       title={"park"}
                     ></PerksCard>
                   </Accordion>
-                  <Accordion title={"Restaurants"} ids={"restaurants"}>
+                  <Accordion title={"Restaurants"} ids={`restaurants-${index}`}>
                     <PerksCard
                       target={locations.restaurant}
                       title={"restaurant"}
                     ></PerksCard>
                   </Accordion>
-                  <Accordion title={"RV Parks"} ids={"rv-parks"}>
+                  <Accordion title={"RV Parks"} ids={`rv-parks-${index}`}>
                     <PerksCard
                       target={locations.rv_park}
                       title={"rv_park"}
@@ -211,7 +210,7 @@ function LocationCard({ data }, props) {
                   </Accordion>
                   <Accordion
                     title={"Tourist Attractions"}
-                    ids={"tourist-attractions"}
+                    ids={`tourist-attractions-${index}`}
                   >
                     <PerksCard
                       target={locations.tourist_attraction}
@@ -219,7 +218,7 @@ function LocationCard({ data }, props) {
                     ></PerksCard>
                   </Accordion>
                 </Row>
-                <Row className={"-map"} >
+                <Row className={"-map"}>
                   <MapGl coords={locations.coords} />
                 </Row>
               </Col>

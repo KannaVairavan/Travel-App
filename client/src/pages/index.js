@@ -103,9 +103,11 @@ function TravelApp() {
               />
               <FormBtn
                 stylename={"location-search"}
+                purpose = {'add'}
                 onClick={(e) => {
                   HandleClick(e, searchInput);
                 }}
+
               >
                 Enter Search
               </FormBtn>

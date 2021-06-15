@@ -26,7 +26,7 @@ function MapGl(props) {
       mapboxApiAccessToken="pk.eyJ1IjoiYXNobGV5aGF5amluIiwiYSI6ImNrcDR4ZTRhMzA1Y3gydm53NHd6azlmNHQifQ.I6InX4UK_K8vaydLp7x_2A"
       {...viewport}
       onViewportChange={nextViewport => setViewport(nextViewport)}>
-      (
+      
         <Marker
         
         longitude={props.coords.lon}
@@ -42,7 +42,7 @@ function MapGl(props) {
         <path d={ICON} />
       </svg>
         </Marker>
-      )
+      
       
       {/* )} */}
     </ReactMapGL>
